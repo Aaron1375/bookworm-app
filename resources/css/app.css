@@ -33,3 +33,86 @@ main {
     margin-left: 6px;
     margin-bottom: 1px;
 }
+
+/* NAV */
+.navbar_warapper a{
+    padding-right: 20px;
+}
+
+.navbar-nav>a{
+    color: white;
+    text-decoration: none;
+    /* margin-top: 7px; */
+    padding: 6px 13px 6px 13px;
+}
+
+.navbar-nav>a:hover { 
+    text-decoration: underline;
+    color: white;
+}
+
+
+.navbar-nav>a:active { 
+    text-decoration: underline;
+    color: white; 
+}
+
+/* HOME */
+
+.cards-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper{
+    display: flex;
+}
+
+.right-button{
+    margin-left: auto;
+}
+
+.card {
+    margin: 0 0.5em;
+    box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);
+    border: none;
+    border-radius: 0;
+}
+  .carousel-inner {
+    padding: 1em;
+}
+
+.carousel-control-prev-icon {
+    margin-right: auto;
+}
+
+.carousel-control-next-icon {
+    margin-left: auto;
+}
+
+.sr-only{
+    display: none;
+}
+
+.title-page{
+    color: black;
+}
+
+/* SHOP */
+ul>li{
+    list-style-type: none;
+}
+
+.accordion .card-header{
+    background-color: white;
+    border: none;
+}
+
+.accordion .btn-link{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+.accordion .btn-link:hover{
+    color: rgb(112, 112, 112);
+}
