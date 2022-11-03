@@ -16,18 +16,24 @@ class BookResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            //Category
+            'category_name' => $this->category_name,
+            // author
+            'author_name' => $this->author->author_name,
+            //Book 
+            'book_cover_photo' => $this->book_cover_photo,
             'book_title' => $this->book_title,
             'book_price' => $this->book_price,
-            'book_cover_photo' => $this->book_cover_photo,
-            'author_name' => $this->author->author_name,
-            'author_id' => $this->author_id,
-            'category_name' => $this->category_name,
+            'final_price' => $this->final_price,
+            // discount
             'discount_price' => $this->discount_price,
             'discount_start_date' => $this->discount_start_date,
             'discount_end_date' => $this->discount_end_date,
-            'final_price' => $this->final_price,
-            // 'onsale' => $this->onsale,
-            'most_rating' => $this->most_rating
+            'most_rating' => $this->most_rating,
+            
+            // review
+            // 'reviews' => $this->reviews,
+            // 'reviews' => ReviewResource::collection($this->reviews)
         ];
     }
 }

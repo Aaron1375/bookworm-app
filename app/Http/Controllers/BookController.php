@@ -27,8 +27,12 @@ class BookController extends Controller
         return $this->bookRepository->showPopular();
     }
 
-    public function show(Request $request){
+    public function index(Request $request){
         return $this->bookRepository->showAllBooks($request);
+    }
+
+    public function show(Request $request, $id){
+        return $this->bookRepository->findById($request, $id);
     }
 
 

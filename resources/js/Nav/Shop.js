@@ -5,9 +5,9 @@ function Shop() {
     return (
         <div className="container mt-5">
             <div className="wrapper">
-                <h1>Books</h1>
+                <h2>Books</h2>
                 <div>&nbsp;</div>
-                <h5 className="mt-3">(Filtered by Category01)</h5>
+                <h5 className="mt-2">(Filtered by Category01)</h5>
             </div>
 
             <hr />

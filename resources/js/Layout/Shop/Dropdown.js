@@ -3,8 +3,8 @@ import {
 } from "react-bootstrap";
 function DropdownShop() {
     return (
-        <div className="wrapper pb-5 ms-auto">
-            <Dropdown>
+        <div className="row pb-5 ms-auto">
+            <Dropdown className="col">
                 <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                     Dropdown Button
                 </Dropdown.Toggle>
@@ -16,8 +16,8 @@ function DropdownShop() {
                     <Dropdown.Item href="#/shop">Something else</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
-
-            <Dropdown>
+                
+            <Dropdown className="col">
                 <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                     Show
                 </Dropdown.Toggle>

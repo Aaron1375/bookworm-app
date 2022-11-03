@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Resources\BookCollection;
 use Carbon\Carbon;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,6 +14,7 @@ class Book extends Model
 
     public $timestamps = false;
     protected $table = 'book';
+    // protected $parPage = 1;
 
     public function author()
     {
@@ -48,6 +50,7 @@ class Book extends Model
                 'discount.discount_price',
                 'discount.discount_start_date',
                 'discount.discount_end_date'
+                
             )
             ->groupBy('book.id', 'discount.id', 'author.id', 'category.id');
     }
@@ -65,12 +68,21 @@ class Book extends Model
 
     public static function staticMostRating($query){
         return $query->selectRaw(
-            'COUNT(review.rating_start) as most_rating'
+            'COALESCE(AVG(review.rating_start), 0.0) as most_rating'
         );
     }
 
-    public static function staticPopular(){
-
+    public static function staticPopular($query){
+        return $query->selectRaw(
+            'CASE
+            WHEN discount_start_date <= now()
+            AND (discount_end_date >= now()
+            OR discount_end_date IS NULL)
+            THEN (book_price - discount_price)
+            ELSE book_price
+            END as final_price,
+            COUNT(review.rating_start) as most_rating'
+        );
     }
 
 

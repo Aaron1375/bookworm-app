@@ -31,9 +31,7 @@ class BookRepository
             ->get();
 
         $books = new BookCollection($book);
-        return response()->json([
-            'ListBook' => $books
-        ], 200);
+        return $books;
     }
 
     // get top 8 books with most rating starts
@@ -53,32 +51,12 @@ class BookRepository
 
     public function showPopular()
     {
-        // $query = Book::select("book.id",
-        //     "book_title",
-        //     DB::raw('CASE
-        //                     when discount_start_date <= now()
-        //                     AND (discount_end_date >= now()
-        //                     OR discount_end_date isnull)
-        //                     THEN (book_price - discount_price)
-        //                     ELSE book_price
-        //                     END as final_price')
-        // )
-        //     ->leftjoin("discount", "discount.book_id", "book.id")
-        //     ->groupBy("book.id", "discount_start_date", "discount_end_date", "discount_price")
-        //     ->withCount('reviews')
-        //     ->orderBy("reviews_count", "desc")
-        //     ->orderBy("final_price", "asc")
-        //     ->limit(8)
-        //     ->get();
-
         $book = Book::getListBooks()
             ->orderBy('most_rating', 'desc')
-            ->orderBy('most_rating', 'desc');
-        
-        $book = Book::staticPopular($book);
-        $book = Book::staticMostRating($book)
-        ->limit(8)
-        ->get();    
+            ->orderBy('final_price', 'asc');
+        $book = Book::staticPopular($book)
+            ->limit(8)
+            ->get();
 
         $books = new BookCollection($book);
         return response()->json([
@@ -89,15 +67,31 @@ class BookRepository
     public function showAllBooks(Request $request)
     {
         $book = Book::getListBooks()
-            ->authorName($request)
-            ->categoryName($request);
+        ->authorName($request)
+            ->categoryName($request)
+            ->orderBy('book.id', 'asc');
+        $book->paginate();
+        $book = Book::staticPopular($book)
+        ->get();
 
-        $books = new BookCollection($book->paginate());
+        $books = new BookCollection($book);
         return response()->json([
             'ListBook' => $books
         ], 200);
     }
 
+    public function findById(Request $request, $id)
+    {
+        // $book = Book::find($id);
+        
+        $book = Book::getListBooks();
+        $books = new BookCollection($book);
+        return response()->json([
+            'ListBook' => $books
+        ], 200);
+    }
+
+    
     public function sortPrice()
     {
         $books = Book::all();

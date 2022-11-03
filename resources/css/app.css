@@ -116,3 +116,15 @@ ul>li{
 .accordion .btn-link:hover{
     color: rgb(112, 112, 112);
 }
+
+.show-book{
+    left: 0;
+}
+
+/* ONSALE */
+.text-content{
+    text-decoration: none;
+    color: black;
+    margin: 0;
+
+}

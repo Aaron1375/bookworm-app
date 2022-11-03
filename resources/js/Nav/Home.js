@@ -1,16 +1,17 @@
 import Hero from "../Layout/Home/Hero";
 import Feature from "../Layout/Home/Feature";
+import { Link } from "react-router-dom";
+import { BsFillCaretRightFill } from "react-icons/bs";
 function Home() {
     return (
         <div className="mt-5">
             <div className="wrapper">
                 <h2>On Sale</h2>
-                <div className="right-button">
-                    <a className="btn btn-secondary" href="/">
-                        View All <i class="fa-solid fa-caret-right"></i>
-                    </a>
-                </div>
+                <Link className="text-white right-button btn btn-dark mt-2"
+                        to="/shop">View all <BsFillCaretRightFill/>
+                </Link>
             </div>
+            <hr />
             <Hero />
 
             <div>

@@ -3,8 +3,9 @@ import Accordion from "react-bootstrap/Accordion";
 
 function Filter() {
     return (
+        <>
         <Accordion defaultActiveKey="0">
-            <Card className="mb-5">
+            <Card className="mb-2 mt-3">
                 <Card.Header>
                     <Accordion.Toggle as={Button} variant="link" eventKey="0">
                         Category
@@ -20,27 +21,32 @@ function Filter() {
                     </Card.Body>
                 </Accordion.Collapse>
             </Card>
-            <Card className="mb-5">
+        </Accordion>
+         <Accordion defaultActiveKey="0">
+            <Card className="mb-2">
                 <Card.Header>
-                    <Accordion.Toggle as={Button} variant="link" eventKey="1">
+                    <Accordion.Toggle as={Button} variant="link" eventKey="0">
                         Author
                     </Accordion.Toggle>
                 </Card.Header>
-                <Accordion.Collapse eventKey="1">
+                <Accordion.Collapse eventKey="0">
                     <Card.Body>Hello! I'm another body</Card.Body>
                 </Accordion.Collapse>
             </Card>
-            <Card className="mb-5">
+         </Accordion>
+          <Accordion defaultActiveKey="0">
+            <Card className="mb-2">
                 <Card.Header>
-                    <Accordion.Toggle as={Button} variant="link" eventKey="2">
+                    <Accordion.Toggle as={Button} variant="link" eventKey="0">
                         Rating
                     </Accordion.Toggle>
                 </Card.Header>
-                <Accordion.Collapse eventKey="2">
+                <Accordion.Collapse eventKey="0">
                     <Card.Body>Hello! I'm another body</Card.Body>
                 </Accordion.Collapse>
             </Card>
-        </Accordion>
+          </Accordion>
+        </>
     );
 }
 

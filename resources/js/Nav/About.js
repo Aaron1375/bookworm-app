@@ -1,12 +1,10 @@
 function About(){
     return(
         <div className="wrapper-about mt-5">
-        <div className="main-title mx-5 mb-4">
             <div className="main-title-information">
-                <h1 classNameclassName="main-title-information-1">
+                <h2 classNameclassName="main-title-information-1">
                     About Us
-                </h1>
-            </div>
+                </h2>
             <hr />
         </div>
         <div className="mx-7">
