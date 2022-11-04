@@ -2,6 +2,7 @@ import Hero from "../Layout/Home/Hero";
 import Feature from "../Layout/Home/Feature";
 import { Link } from "react-router-dom";
 import { BsFillCaretRightFill } from "react-icons/bs";
+
 function Home() {
     return (
         <div className="mt-5">
@@ -15,7 +16,7 @@ function Home() {
             <Hero />
 
             <div>
-            <h2 className="mt-5 m-auto">Feature Book</h2>
+            <h2 className="mt-5 text-center">Feature Book</h2>
             <Feature/>
             </div>
 

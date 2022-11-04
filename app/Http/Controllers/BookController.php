@@ -28,7 +28,7 @@ class BookController extends Controller
     }
 
     public function index(Request $request){
-        return $this->bookRepository->showAllBooks($request);
+        return $this->bookRepository->sortBySale($request);
     }
 
     public function show(Request $request, $id){

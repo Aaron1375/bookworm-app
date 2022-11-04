@@ -14,8 +14,7 @@ class Book extends Model
 
     public $timestamps = false;
     protected $table = 'book';
-    // protected $parPage = 1;
-
+    protected $parPage = 1;
     public function author()
     {
         return $this->belongsTo(Author::class);
@@ -64,6 +63,15 @@ class Book extends Model
             ELSE book_price
             END as final_price'
         );
+    }
+    public function scopeSubPrice($query)
+    {
+        return $query
+            ->selectRaw('CASE
+                        WHEN (discount_end_date IS NULL AND DATE(NOW()) >= discount_start_date) THEN book_price - discount_price
+                        WHEN (discount_end_date IS NOT NULL AND ( DATE(NOW()) >= discount_start_date AND DATE(NOW()) <= discount_end_date ) ) THEN book_price - discount_price
+                        ELSE 0
+                        END AS sub_price');
     }
 
     public static function staticMostRating($query){

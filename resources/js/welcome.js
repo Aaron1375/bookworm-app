@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, HashRouter, Route, Router, Routes } from "react-router-dom";
+import { HashRouter, Route, Router, Routes } from "react-router-dom";
 import "../css/app.css";
 import Header from "./Layout/Header";
 import Home from "./Nav/Home";
@@ -7,7 +7,7 @@ import Shop from "./Nav/Shop";
 import About from "./Nav/About";
 import Cart from "./Nav/Cart";
 import { Container } from "react-bootstrap";
-import Onsale from "./Layout/Home/Onsale";
+import Footer from "./Layout/Footer";
 class Welcome extends Component {
     render() {
         return (
@@ -19,10 +19,9 @@ class Welcome extends Component {
                     <Route exact path="shop" element={<Shop />} />
                     <Route path="about" element={<About />} />
                     <Route path="cart" element={<Cart />} />
-                    <Route path="/onsale" element={<Onsale/>}></Route>
                 </Routes>
                 </Container>
-
+                <Footer/>
             </HashRouter>
         );
     }

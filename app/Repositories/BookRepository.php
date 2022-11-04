@@ -24,9 +24,9 @@ class BookRepository
     // }
     public function showDiscount()
     {
-        $book = Book::getListBooks()
-            ->orderBy('final_price', 'asc');
-        $book = Book::staticFinalPrice($book)
+        $book = Book::getListBooks()->subPrice()
+            ->orderBy('sub_price', 'desc');
+            $book = Book::staticFinalPrice($book)
             ->limit(10)
             ->get();
 
@@ -44,9 +44,7 @@ class BookRepository
             ->get();
 
         $books = new BookCollection($book);
-        return response()->json([
-            'ListBook' => $books
-        ], 200);
+        return $books;
     }
 
     public function showPopular()
@@ -59,25 +57,24 @@ class BookRepository
             ->get();
 
         $books = new BookCollection($book);
-        return response()->json([
-            'ListBook' => $books
-        ], 200);
+        return $books;
     }
 
-    public function showAllBooks(Request $request)
+    
+    public function sortBySale(Request $request)
     {
+
         $book = Book::getListBooks()
-        ->authorName($request)
+            ->subPrice()
+            ->authorName($request)
             ->categoryName($request)
-            ->orderBy('book.id', 'asc');
+            ->orderBy('sub_price', 'desc');
         $book->paginate();
         $book = Book::staticPopular($book)
         ->get();
 
         $books = new BookCollection($book);
-        return response()->json([
-            'ListBook' => $books
-        ], 200);
+        return $books;
     }
 
     public function findById(Request $request, $id)
@@ -86,9 +83,7 @@ class BookRepository
         
         $book = Book::getListBooks();
         $books = new BookCollection($book);
-        return response()->json([
-            'ListBook' => $books
-        ], 200);
+        return $books;
     }
 
     

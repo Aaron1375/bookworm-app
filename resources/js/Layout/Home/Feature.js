@@ -1,7 +1,34 @@
 import { Card, ListGroup, Tab, Tabs } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import axios from "axios";
+import CardBooks from "../CardBooks";
+function Feature() {
+    const [recommended, setRecommended] = useState([]);
+    const [popular, setPopular] = useState([]);
+    const baseURL = "http://127.0.0.1:8000/api/home/recommended";
 
-function Feature(){
-    return(
+    useEffect(() => {
+        axios
+            .get(baseURL)
+            .then((response) => {
+                const topRecommended = response.data.data;
+                // console.log(topRecommended);
+                setRecommended(topRecommended);
+            })
+            .catch((error) => console.error(`Error: ${error}`));
+
+        axios
+            .get("http://127.0.0.1:8000/api/home/popular")
+            .then((response) => {
+                const topPopular = response.data.data;
+                // console.log(topPopular);
+                setPopular(topPopular);
+            })
+            .catch((error) => console.error(`Error: ${error}`));
+    }, []);
+
+    return (
         <div>
             <Tabs
                 defaultActiveKey="recommended"
@@ -9,341 +36,23 @@ function Feature(){
                 id="noanim-tab-example"
                 className="mb-3"
             >
-                <Tab eventKey="recommended" title="Recommended" >
-                <div className="col">
-                    <div className="row justify-content-center">
-                    <Card style={{ width: "18rem" }}>
-                            <Card.Img
-                                variant="top"
-                                src={"../images/book1.jpg"}
-                                alt="image1"
-                                height={"300px"}
-                            />
-                            <Card.Body>
-                                <Card.Title>Book Title</Card.Title>
-                                <Card.Text style={{ fontSize: "12px" }}>
-                                    Author Name
-                                </Card.Text>
-                            </Card.Body>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item>
-                                    <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                                    <b>$price</b>
-                                </ListGroup.Item>
-                            </ListGroup>
-                    </Card>
-                        <Card style={{ width: "18rem" }}>
-                            <Card.Img
-                                variant="top"
-                                src={"../images/book1.jpg"}
-                                alt="image1"
-                                height={"300px"}
-                            />
-                            <Card.Body>
-                                <Card.Title>Book Title</Card.Title>
-                                <Card.Text style={{ fontSize: "12px" }}>
-                                    Author Name
-                                </Card.Text>
-                            </Card.Body>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item>
-                                    <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                                    <b>$price</b>
-                                </ListGroup.Item>
-                            </ListGroup>
-                        </Card>
-                        <Card style={{ width: "18rem" }}>
-                            <Card.Img
-                                variant="top"
-                                src={"../images/book1.jpg"}
-                                alt="image1"
-                                height={"300px"}
-                            />
-                            <Card.Body>
-                                <Card.Title>Book Title</Card.Title>
-                                <Card.Text style={{ fontSize: "12px" }}>
-                                    Author Name
-                                </Card.Text>
-                            </Card.Body>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item>
-                                    <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                                    <b>$price</b>
-                                </ListGroup.Item>
-                            </ListGroup>
-                        </Card>
-                        <Card style={{ width: "18rem" }}>
-                            <Card.Img
-                                variant="top"
-                                src={"../images/book1.jpg"}
-                                alt="image1"
-                                height={"300px"}
-                            />
-                            <Card.Body>
-                                <Card.Title>Book Title</Card.Title>
-                                <Card.Text style={{ fontSize: "12px" }}>
-                                    Author Name
-                                </Card.Text>
-                            </Card.Body>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item>
-                                    <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                                    <b>$price</b>
-                                </ListGroup.Item>
-                            </ListGroup>
-                        </Card>
-                        <Card style={{ width: "18rem" }}>
-                            <Card.Img
-                                variant="top"
-                                src={"../images/book1.jpg"}
-                                alt="image1"
-                                height={"300px"}
-                            />
-                            <Card.Body>
-                                <Card.Title>Book Title</Card.Title>
-                                <Card.Text style={{ fontSize: "12px" }}>
-                                    Author Name
-                                </Card.Text>
-                            </Card.Body>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item>
-                                    <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                                    <b>$price</b>
-                                </ListGroup.Item>
-                            </ListGroup>
-                        </Card>
-                        <Card style={{ width: "18rem" }}>
-                            <Card.Img
-                                variant="top"
-                                src={"../images/book1.jpg"}
-                                alt="image1"
-                                height={"300px"}
-                            />
-                            <Card.Body>
-                                <Card.Title>Book Title</Card.Title>
-                                <Card.Text style={{ fontSize: "12px" }}>
-                                    Author Name
-                                </Card.Text>
-                            </Card.Body>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item>
-                                    <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                                    <b>$price</b>
-                                </ListGroup.Item>
-                            </ListGroup>
-                        </Card>
-                        <Card style={{ width: "18rem" }}>
-                            <Card.Img
-                                variant="top"
-                                src={"../images/book1.jpg"}
-                                alt="image1"
-                                height={"300px"}
-                            />
-                            <Card.Body>
-                                <Card.Title>Book Title</Card.Title>
-                                <Card.Text style={{ fontSize: "12px" }}>
-                                    Author Name
-                                </Card.Text>
-                            </Card.Body>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item>
-                                    <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                                    <b>$price</b>
-                                </ListGroup.Item>
-                            </ListGroup>
-                        </Card>
-                        <Card style={{ width: "18rem" }}>
-                            <Card.Img
-                                variant="top"
-                                src={"../images/book1.jpg"}
-                                alt="image1"
-                                height={"300px"}
-                            />
-                            <Card.Body>
-                                <Card.Title>Book Title</Card.Title>
-                                <Card.Text style={{ fontSize: "12px" }}>
-                                    Author Name
-                                </Card.Text>
-                            </Card.Body>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item>
-                                    <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                                    <b>$price</b>
-                                </ListGroup.Item>
-                            </ListGroup>
-                        </Card>
+                <Tab eventKey="recommended" title="Recommended">
+                    <div className="row">
+                        {recommended.map((book, index) => {
+                            return <CardBooks book={book} key={index} />;
+                        })}
                     </div>
-                </div>
                 </Tab>
                 <Tab eventKey="popular" title="Popular">
-                <div className="col">
-                    <div className="row justify-content-center">
-                    <Card style={{ width: "18rem" }}>
-                            <Card.Img
-                                variant="top"
-                                src={"../images/book1.jpg"}
-                                alt="image1"
-                                height={"300px"}
-                            />
-                            <Card.Body>
-                                <Card.Title>Book Title</Card.Title>
-                                <Card.Text style={{ fontSize: "12px" }}>
-                                    Author Name
-                                </Card.Text>
-                            </Card.Body>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item>
-                                    <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                                    <b>$price</b>
-                                </ListGroup.Item>
-                            </ListGroup>
-                    </Card>
-                        <Card style={{ width: "18rem" }}>
-                            <Card.Img
-                                variant="top"
-                                src={"../images/book1.jpg"}
-                                alt="image1"
-                                height={"300px"}
-                            />
-                            <Card.Body>
-                                <Card.Title>Book Title</Card.Title>
-                                <Card.Text style={{ fontSize: "12px" }}>
-                                    Author Name
-                                </Card.Text>
-                            </Card.Body>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item>
-                                    <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                                    <b>$price</b>
-                                </ListGroup.Item>
-                            </ListGroup>
-                        </Card>
-                        <Card style={{ width: "18rem" }}>
-                            <Card.Img
-                                variant="top"
-                                src={"../images/book1.jpg"}
-                                alt="image1"
-                                height={"300px"}
-                            />
-                            <Card.Body>
-                                <Card.Title>Book Title</Card.Title>
-                                <Card.Text style={{ fontSize: "12px" }}>
-                                    Author Name
-                                </Card.Text>
-                            </Card.Body>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item>
-                                    <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                                    <b>$price</b>
-                                </ListGroup.Item>
-                            </ListGroup>
-                        </Card>
-                        <Card style={{ width: "18rem" }}>
-                            <Card.Img
-                                variant="top"
-                                src={"../images/book1.jpg"}
-                                alt="image1"
-                                height={"300px"}
-                            />
-                            <Card.Body>
-                                <Card.Title>Book Title</Card.Title>
-                                <Card.Text style={{ fontSize: "12px" }}>
-                                    Author Name
-                                </Card.Text>
-                            </Card.Body>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item>
-                                    <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                                    <b>$price</b>
-                                </ListGroup.Item>
-                            </ListGroup>
-                        </Card>
-                        <Card style={{ width: "18rem" }}>
-                            <Card.Img
-                                variant="top"
-                                src={"../images/book1.jpg"}
-                                alt="image1"
-                                height={"300px"}
-                            />
-                            <Card.Body>
-                                <Card.Title>Book Title</Card.Title>
-                                <Card.Text style={{ fontSize: "12px" }}>
-                                    Author Name
-                                </Card.Text>
-                            </Card.Body>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item>
-                                    <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                                    <b>$price</b>
-                                </ListGroup.Item>
-                            </ListGroup>
-                        </Card>
-                        <Card style={{ width: "18rem" }}>
-                            <Card.Img
-                                variant="top"
-                                src={"../images/book1.jpg"}
-                                alt="image1"
-                                height={"300px"}
-                            />
-                            <Card.Body>
-                                <Card.Title>Book Title</Card.Title>
-                                <Card.Text style={{ fontSize: "12px" }}>
-                                    Author Name
-                                </Card.Text>
-                            </Card.Body>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item>
-                                    <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                                    <b>$price</b>
-                                </ListGroup.Item>
-                            </ListGroup>
-                        </Card>
-                        <Card style={{ width: "18rem" }}>
-                            <Card.Img
-                                variant="top"
-                                src={"../images/book1.jpg"}
-                                alt="image1"
-                                height={"300px"}
-                            />
-                            <Card.Body>
-                                <Card.Title>Book Title</Card.Title>
-                                <Card.Text style={{ fontSize: "12px" }}>
-                                    Author Name
-                                </Card.Text>
-                            </Card.Body>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item>
-                                    <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                                    <b>$price</b>
-                                </ListGroup.Item>
-                            </ListGroup>
-                        </Card>
-                        <Card style={{ width: "18rem" }}>
-                            <Card.Img
-                                variant="top"
-                                src={"../images/book1.jpg"}
-                                alt="image1"
-                                height={"300px"}
-                            />
-                            <Card.Body>
-                                <Card.Title>Book Title</Card.Title>
-                                <Card.Text style={{ fontSize: "12px" }}>
-                                    Author Name
-                                </Card.Text>
-                            </Card.Body>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item>
-                                    <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                                    <b>$price</b>
-                                </ListGroup.Item>
-                            </ListGroup>
-                        </Card>
+                    <div className="row">
+                        {popular.map((book, index) => {
+                            return <CardBooks book={book} key={index} />;
+                        })}
                     </div>
-                </div>
                 </Tab>
             </Tabs>
         </div>
     );
 }
 
-export default Feature
+export default Feature;

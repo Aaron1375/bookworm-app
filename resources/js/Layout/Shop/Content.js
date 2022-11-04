@@ -1,94 +1,28 @@
 import { Card, ListGroup } from "react-bootstrap";
+import { React, useEffect, useState } from "react";
+import axios from "axios";
+import CardBooks from "../CardBooks";
 
-function Content() {
+export default function Content() {
+    const [show, setShow] = useState([]);
+    const baseURL = "http://127.0.0.1:8000/api/show";
+
+    useEffect(() => {
+        axios
+            .get(baseURL)
+            .then((response) => {
+                const books = response.data.data;
+                console.log(books);
+                setShow(books);
+            })
+            .catch((error) => console.error(`Error: ${error}`));
+    }, []);
+
     return (
         <div className="row">
-            <Card style={{ width: "15rem"}}>
-                <Card.Img
-                    variant="top"
-                    src={"../images/book1.jpg"}
-                    alt="image1"
-                    height={"300px"}
-                />
-                <Card.Body>
-                    <Card.Title>Book Title</Card.Title>
-                    <Card.Text style={{ fontSize: "12px" }}>
-                        Author Name
-                    </Card.Text>
-                </Card.Body>
-                <ListGroup variant="flush">
-                    <ListGroup.Item>
-                        <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                        <b>$price</b>
-                    </ListGroup.Item>
-                </ListGroup>
-            </Card>
-
-            <Card style={{ width: "15rem" }}>
-                <Card.Img
-                    variant="top"
-                    src={"../images/book1.jpg"}
-                    alt="image1"
-                    height={"300px"}
-                />
-                <Card.Body>
-                    <Card.Title>Book Title</Card.Title>
-                    <Card.Text style={{ fontSize: "12px" }}>
-                        Author Name
-                    </Card.Text>
-                </Card.Body>
-                <ListGroup variant="flush">
-                    <ListGroup.Item>
-                        <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                        <b>$price</b>
-                    </ListGroup.Item>
-                </ListGroup>
-            </Card>
-
-            <Card style={{ width: "15rem" }}>
-                <Card.Img
-                    variant="top"
-                    src={"../images/book1.jpg"}
-                    alt="image1"
-                    height={"300px"}
-                />
-                <Card.Body>
-                    <Card.Title>Book Title</Card.Title>
-                    <Card.Text style={{ fontSize: "12px" }}>
-                        Author Name
-                    </Card.Text>
-                </Card.Body>
-                <ListGroup variant="flush">
-                    <ListGroup.Item>
-                        <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                        <b>$price</b>
-                    </ListGroup.Item>
-                </ListGroup>
-            </Card>
-
-            <Card style={{ width: "15rem" }}>
-                <Card.Img
-                    variant="top"
-                    src={"../images/book1.jpg"}
-                    alt="image1"
-                    height={"300px"}
-                />
-                <Card.Body>
-                    <Card.Title>Book Title</Card.Title>
-                    <Card.Text style={{ fontSize: "12px" }}>
-                        Author Name
-                    </Card.Text>
-                </Card.Body>
-                <ListGroup variant="flush">
-                    <ListGroup.Item>
-                        <del style={{ fontSize: "12px" }}>Or price</del>{" "}
-                        <b>$price</b>
-                    </ListGroup.Item>
-                </ListGroup>
-            </Card>
-
+            {show.map((book, index) => {
+                return <CardBooks book={book} key={index} />;
+            })}
         </div>
     );
 }
-
-export default Content;

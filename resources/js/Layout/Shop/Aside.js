@@ -1,7 +1,8 @@
 import { Button, Card } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 
-function Filter() {
+function Filter(props) {
+    // console.log(props);
     return (
         <>
         <Accordion defaultActiveKey="0">
@@ -14,9 +15,11 @@ function Filter() {
                 <Accordion.Collapse eventKey="0">
                     <Card.Body>
                         <ul>
-                            <li><a href="#/category1">Category 1</a></li>
-                            <li><a>Category 2</a></li>
-                            <li><a>Category 2</a></li>
+
+                                <li><a href="#/category1">Category 1</a></li>
+                                <li><a>Category 2</a></li>
+                                <li><a>Category 2</a></li>
+
                         </ul>
                     </Card.Body>
                 </Accordion.Collapse>

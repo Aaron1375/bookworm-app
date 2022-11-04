@@ -1,5 +1,6 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Footer from "./Footer";
 import LoginDropdown from "./Header/LoginDropdown";
 import LoginModal from "./Header/LoginModal";
 import logoimg from "./riot.png";
@@ -36,6 +37,8 @@ function Header() {
                     </Nav>
                 </Container>
             </Navbar>
+            
+
         </nav>
     );
 }

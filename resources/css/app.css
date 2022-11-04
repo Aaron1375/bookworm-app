@@ -58,12 +58,6 @@ main {
 }
 
 /* HOME */
-
-.cards-wrapper {
-    display: flex;
-    justify-content: center;
-}
-
 .wrapper{
     display: flex;
 }
@@ -127,4 +121,19 @@ ul>li{
     color: black;
     margin: 0;
 
+}
+
+.card-title{
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+}
+
+.nav-tabs{
+    justify-content: center;
+}
+
+.show-display{
+    margin: 0;
+    padding: 0;
 }
