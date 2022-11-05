@@ -137,3 +137,27 @@ ul>li{
     margin: 0;
     padding: 0;
 }
+
+/* Detail */
+.detail-body{
+    margin: 0;
+    padding: 0;
+}
+.text-aligh-right{
+    text-align: right;
+}
+
+.book-detail{
+    height: 380px;
+}
+.review-star > a{
+    color: black;
+}
+/* Footer */
+footer{
+    flex-shrink: 0;
+}
+
+.right-col{
+    padding: 0 0 20px 20px !important;
+}

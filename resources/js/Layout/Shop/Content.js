@@ -1,11 +1,10 @@
-import { Card, ListGroup } from "react-bootstrap";
 import { React, useEffect, useState } from "react";
 import axios from "axios";
 import CardBooks from "../CardBooks";
 
 export default function Content() {
     const [show, setShow] = useState([]);
-    const baseURL = "http://127.0.0.1:8000/api/show";
+    const baseURL = "http://127.0.0.1:8000/api/show?onsale=desc&per_page=15";
 
     useEffect(() => {
         axios
@@ -23,6 +22,7 @@ export default function Content() {
             {show.map((book, index) => {
                 return <CardBooks book={book} key={index} />;
             })}
+            
         </div>
     );
 }

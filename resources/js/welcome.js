@@ -8,6 +8,8 @@ import About from "./Nav/About";
 import Cart from "./Nav/Cart";
 import { Container } from "react-bootstrap";
 import Footer from "./Layout/Footer";
+import Detail from './Layout/Detail/Detail';
+
 class Welcome extends Component {
     render() {
         return (
@@ -19,6 +21,9 @@ class Welcome extends Component {
                     <Route exact path="shop" element={<Shop />} />
                     <Route path="about" element={<About />} />
                     <Route path="cart" element={<Cart />} />
+                    <Route path="/detail" element={<Detail />} />
+               
+                    Detail
                 </Routes>
                 </Container>
                 <Footer/>

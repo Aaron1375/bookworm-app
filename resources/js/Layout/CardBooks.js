@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, ListGroup } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import IMAGES from "../../assets/bookcover/images";
 
 export default function CardBooks(props) {
@@ -8,6 +9,7 @@ export default function CardBooks(props) {
     
     return (
         <div className="col-3 justify-content-center mt-2 ml-2">
+            <Link className="text-content" to="/detail">
             <Card>
                 <Card.Img
                     variant="top"
@@ -28,6 +30,7 @@ export default function CardBooks(props) {
                     </ListGroup.Item>
                 </ListGroup>
             </Card>
+            </Link>
         </div>
     );
 }

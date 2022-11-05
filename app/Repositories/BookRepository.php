@@ -24,7 +24,8 @@ class BookRepository
     // }
     public function showDiscount()
     {
-        $book = Book::getListBooks()->subPrice()
+        $book = Book::getListBooks()
+            ->subPrice()
             ->orderBy('sub_price', 'desc');
         $book = Book::staticFinalPrice($book)
             ->limit(10)
@@ -68,21 +69,23 @@ class BookRepository
             ->subPrice()
             ->authorId($request)
             ->categoryId($request)
-            ->MostRating($request);
+            // ->orderBy('sub_price', 'desc')
+            ->mostRating($request);
+
         // Another way to set url
-        // if ($sort = $request->input('sort')) {
-        // $book->orderBy('sub_price', 'desc');
-        // }
-        // $book
-        //     ->paginate();
+        if ($request->input('onsale')) {
+            $book->orderBy('sub_price', 'desc');
+        }
+         
         if ($page = $request->input('per_page')) {
             $book
                 ->paginate($page);
         }
-        if ($request->input('sort') == 'onsale') {
-            $book
-                ->orderBy('sub_price', 'desc');
-        }
+
+        // if ($request->input('sort') == 'onsale') {
+        //     $book
+        //         ->orderBy('sub_price', 'desc');
+        // }
         if ($request->input('sort') == 'hightolow') {
             $book
                 ->orderBy('final_price', 'desc');
@@ -103,7 +106,6 @@ class BookRepository
         // $book->authorName($request)
         // ->categoryName($request);
 
-
         $book = Book::staticPopular($book)
             ->get();
         $books = new BookCollection($book);
@@ -112,8 +114,9 @@ class BookRepository
 
     public function findById($id)
     {
-        $book = Book::bookDetail();   
-        
+        // $book = Book::bookDetail();
+        $book = Book::bookDetail();
+
         $book->find($id);
 
         return $book->get();

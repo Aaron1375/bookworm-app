@@ -2,7 +2,7 @@ import Filter from "../Layout/Shop/Aside";
 import Content from "../Layout/Shop/Content";
 import { React, useEffect, useState } from "react";
 
-import DropdownShop from "../Layout/Shop/Dropdown";
+import DropdownShop from "../Layout/Shop/DropdownShop";
 function Shop() {
     // const [show, setShow] = useState([]);
     // const baseURL = "http://127.0.0.1:8000/api/show";

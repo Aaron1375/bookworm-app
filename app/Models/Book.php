@@ -123,7 +123,8 @@ class Book extends Model
     {
         if ($request->has('rating_start')) {
             $query->where('rating_start', '>=', $request->rating_start)
-            ->orderBy('rating_start','asc');
+            ->orderBy('rating_start','asc')
+            ->groupBy('rating_start');
         }
         return $query;
     }
