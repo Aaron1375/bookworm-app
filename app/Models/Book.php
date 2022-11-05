@@ -14,10 +14,15 @@ class Book extends Model
 
     public $timestamps = false;
     protected $table = 'book';
-    protected $parPage = 1;
+    // protected $perPage = 1;
     public function author()
     {
         return $this->belongsTo(Author::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 
     public function reviews()
@@ -46,6 +51,7 @@ class Book extends Model
                 'book.book_price',
                 'author.author_name',
                 'category.category_name',
+                'book.category_id',
                 'discount.discount_price',
                 'discount.discount_start_date',
                 'discount.discount_end_date'
@@ -80,6 +86,8 @@ class Book extends Model
         );
     }
 
+   
+
     public static function staticPopular($query){
         return $query->selectRaw(
             'CASE
@@ -89,25 +97,59 @@ class Book extends Model
             THEN (book_price - discount_price)
             ELSE book_price
             END as final_price,
-            COUNT(review.rating_start) as most_rating'
+            COUNT(review.id) as most_rating,
+            COALESCE(AVG(review.rating_start), 0.0) as rating_start'
         );
     }
 
 
-    public function scopeAuthorName($query, $request)
+    public function scopeAuthorId($query, $request)
     {
-        if ($request->has('author_name')) {
-            $query->where('author_name', $request->author_name);
+        if ($request->has('author_id')) {
+            $query->where('author_id', $request->author_id);
         }
         return $query;
     }
 
-    public function scopeCategoryName($query, $request)
+    public function scopeCategoryId($query, $request)
     {
-        if ($request->has('category_name')) {
-            $query->where('category_name', $request->category_name);
+        if ($request->has('category_id')) {
+            $query->where('category_id', $request->category_id);
         }
         return $query;
     }
 
+    public function scopeMostRating($query, $request)
+    {
+        if ($request->has('rating_start')) {
+            $query->where('rating_start', '>=', $request->rating_start)
+            ->orderBy('rating_start','asc');
+        }
+        return $query;
+    }
+
+    public function scopeBookDetail($query){
+        return $query
+            ->leftjoin('author', 'book.author_id', 'author.id')
+            ->leftjoin('discount', 'discount.book_id', 'book.id')
+            ->select(
+                'book.id',
+                'book.book_cover_photo',
+                'book.book_title',
+                'book.book_summary',
+                'author.author_name',
+                'book.book_price',
+                'discount.discount_price',
+                'discount.discount_start_date',
+                'discount.discount_end_date'
+                
+            )
+            ->selectRaw('CASE
+                        WHEN (discount_end_date IS NULL AND DATE(NOW()) >= discount_start_date) THEN book_price - discount_price
+                        WHEN (discount_end_date IS NOT NULL AND ( DATE(NOW()) >= discount_start_date AND DATE(NOW()) <= discount_end_date ) ) THEN book_price - discount_price
+                        ELSE 0
+                        END AS sub_price')
+            ->groupBy('book.id', 'discount.id', 'author.id');
+         
+    }
 }

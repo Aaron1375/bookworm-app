@@ -27,13 +27,17 @@ Route::get('/home/recommended', [BookController::class, 'recommended']);
 Route::get('/home/popular', [BookController::class, 'showPopular']);
 
 Route::get('/show', [BookController::class, 'index']);
-Route::get('/show/{id}', [BookController::class, 'show']);
-Route::get('review', [ReviewController::class, 'index']);
-// Route::get('review/{id}', [ReviewController::class, 'show']);
+
+
+Route::get('/bookdetail/{id}', [BookController::class, 'show']);
+Route::get('/bookdetail/review/{id}', [ReviewController::class, 'showReview']);
+// Route::get('review/', [ReviewController::class, 'index']);
 
 
 
 Route::post('/login', [AuthController::class, 'login']);
+
+
 // Protected Route
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);

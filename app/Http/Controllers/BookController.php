@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Resources\BookResource;
 use App\Repositories\BookRepository;
 use Illuminate\Http\Request;
 
@@ -31,8 +29,8 @@ class BookController extends Controller
         return $this->bookRepository->sortBySale($request);
     }
 
-    public function show(Request $request, $id){
-        return $this->bookRepository->findById($request, $id);
+    public function show($id){
+        return $this->bookRepository->findById($id);
     }
 
 

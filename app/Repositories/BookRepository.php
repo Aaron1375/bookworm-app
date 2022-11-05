@@ -26,7 +26,7 @@ class BookRepository
     {
         $book = Book::getListBooks()->subPrice()
             ->orderBy('sub_price', 'desc');
-            $book = Book::staticFinalPrice($book)
+        $book = Book::staticFinalPrice($book)
             ->limit(10)
             ->get();
 
@@ -39,6 +39,7 @@ class BookRepository
     {
         $book = Book::getListBooks()
             ->orderBy('most_rating', 'desc');
+
         $book = Book::staticMostRating($book)
             ->limit(8)
             ->get();
@@ -60,51 +61,61 @@ class BookRepository
         return $books;
     }
 
-    
     public function sortBySale(Request $request)
     {
 
         $book = Book::getListBooks()
             ->subPrice()
-            ->authorName($request)
-            ->categoryName($request)
-            ->orderBy('sub_price', 'desc');
-        $book->paginate();
+            ->authorId($request)
+            ->categoryId($request)
+            ->MostRating($request);
+        // Another way to set url
+        // if ($sort = $request->input('sort')) {
+        // $book->orderBy('sub_price', 'desc');
+        // }
+        // $book
+        //     ->paginate();
+        if ($page = $request->input('per_page')) {
+            $book
+                ->paginate($page);
+        }
+        if ($request->input('sort') == 'onsale') {
+            $book
+                ->orderBy('sub_price', 'desc');
+        }
+        if ($request->input('sort') == 'hightolow') {
+            $book
+                ->orderBy('final_price', 'desc');
+        }
+        if ($request->input('sort') == 'lowtohigh') {
+            $book
+                ->orderBy('final_price', 'asc');
+        }
+        if ($request->input('sort') == 'popular') {
+            $book
+                ->orderBy('most_rating', 'desc')
+                ->orderBy('final_price', 'asc');
+        }
+        // if ($sort = $request->input('sortprice')) {
+        //     $book
+        //         ->orderBy('discount_price', $sort);
+        // }
+        // $book->authorName($request)
+        // ->categoryName($request);
+
+
         $book = Book::staticPopular($book)
-        ->get();
-
+            ->get();
         $books = new BookCollection($book);
         return $books;
     }
 
-    public function findById(Request $request, $id)
+    public function findById($id)
     {
-        // $book = Book::find($id);
+        $book = Book::bookDetail();   
         
-        $book = Book::getListBooks();
-        $books = new BookCollection($book);
-        return $books;
-    }
+        $book->find($id);
 
-    
-    public function sortPrice()
-    {
-        $books = Book::all();
-
-        $books = $books->sortBy(function ($book) {
-            return $book->finalPrice;
-        });
-        return $books;
-    }
-
-    public function sortPriceDesc()
-    {
-        $books = Book::all();
-
-        $books = $books->sortByDesc(function ($book) {
-            return $book->finalPrice;
-        });
-
-        return $books;
+        return $book->get();
     }
 }

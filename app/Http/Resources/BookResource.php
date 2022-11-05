@@ -18,8 +18,10 @@ class BookResource extends JsonResource
             'id' => $this->id,
             //Category
             'category_name' => $this->category_name,
+            'category_id' => $this->category->id,
             // author
             'author_name' => $this->author->author_name,
+            'author_id' => $this->author->id,
             //Book 
             'book_cover_photo' => $this->book_cover_photo ? $this->book_cover_photo : 'book1',
             'book_title' => $this->book_title,
@@ -31,6 +33,7 @@ class BookResource extends JsonResource
             'discount_start_date' => $this->discount_start_date,
             'discount_end_date' => $this->discount_end_date,
             'most_rating' => $this->most_rating,
+            'rating_start' => $this->rating_start,
             
             // review
             // 'reviews' => $this->reviews,

@@ -17,7 +17,8 @@ class ReviewController extends Controller
     // public function index(){
     //     return $this->reviewRepository->index();
     // }
-    // public function show($id){
-    //     return $this->reviewRepository->show($id);
-    // }
+
+    public function showReview(Request $request, $id){
+        return $this->reviewRepository->getReviewByBookId($request, $id);
+    }
 }
