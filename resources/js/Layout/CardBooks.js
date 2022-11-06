@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import IMAGES from "../../assets/bookcover/images";
 
 export default function CardBooks(props) {
-    // console.log(props);
-    const { book } = props;
     
     return (
         <div className="col-3 justify-content-center mt-2 ml-2">
@@ -13,20 +11,20 @@ export default function CardBooks(props) {
             <Card>
                 <Card.Img
                     variant="top"
-                    src={IMAGES[book.book_cover_photo]}
+                    src={IMAGES[props.book.book_cover_photo]}
                     alt="image1"
                     height={"300px"}
                 />
                 <Card.Body>
-                    <Card.Title>{book.book_title}</Card.Title>
+                    <Card.Title>{props.book.book_title}</Card.Title>
                     <Card.Text style={{ fontSize: "12px" }}>
-                        {book.author_name}
+                        {props.author_name}
                     </Card.Text>
                 </Card.Body>
                 <ListGroup variant="flush">
                     <ListGroup.Item>
-                        <del style={{ fontSize: "12px" }}>{book.discount_price ? "$"+book.book_price : ""}</del>{" "}
-                        <b>{book.discount_price ? "$" + book.discount_price : "$" + book.book_price}</b>
+                        <del style={{ fontSize: "12px" }}>{props.book.discount_price ? "$"+props.book.book_price : ""}</del>{" "}
+                        <b>{props.book.discount_price ? "$" + props.book.discount_price : "$" + props.book.book_price}</b>
                     </ListGroup.Item>
                 </ListGroup>
             </Card>

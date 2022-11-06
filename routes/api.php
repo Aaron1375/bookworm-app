@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +33,10 @@ Route::get('/show', [BookController::class, 'index']);
 
 Route::get('/bookdetail/{id}', [BookController::class, 'show']);
 Route::get('/bookdetail/review/{id}', [ReviewController::class, 'showReview']);
-// Route::get('review/', [ReviewController::class, 'index']);
+
+Route::get('/author', [AuthorController::class, 'getAuthor']);
+Route::get('/category', [CategoryController::class, 'getCategory']);
+
 
 
 
