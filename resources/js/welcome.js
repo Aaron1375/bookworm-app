@@ -21,9 +21,12 @@ class Welcome extends Component {
                     <Route exact path="shop" element={<Shop />} />
                     <Route path="about" element={<About />} />
                     <Route path="cart" element={<Cart />} />
-                    <Route path="/detail" element={<Detail />} />
-               
-                    Detail
+                    <Route path="/detail/:id" element={<Detail />} />
+                    <Route exact path="shop/category/:categoryId" element={<Shop />} />
+                    <Route exact path="shop/author/:authorId" element={<Shop />} />
+                    <Route exact path="shop/star/:star" element={<Shop />} />
+
+                    
                 </Routes>
                 </Container>
                 <Footer/>

@@ -55,13 +55,15 @@ class Book extends Model
                 'discount.discount_price',
                 'discount.discount_start_date',
                 'discount.discount_end_date'
-                
+
             )
             ->groupBy('book.id', 'discount.id', 'author.id', 'category.id');
     }
 
-    public static function staticFinalPrice($query){
-        return $query->selectRaw('CASE
+    public static function staticFinalPrice($query)
+    {
+        return $query->selectRaw(
+            'CASE
             when discount_start_date <= now()
             AND (discount_end_date >= now()
             OR discount_end_date IS NULL)
@@ -80,15 +82,17 @@ class Book extends Model
                         END AS sub_price');
     }
 
-    public static function staticMostRating($query){
+    public static function staticMostRating($query)
+    {
         return $query->selectRaw(
             'COALESCE(AVG(review.rating_start), 0.0) as most_rating'
         );
     }
 
-   
 
-    public static function staticPopular($query){
+
+    public static function staticPopular($query)
+    {
         return $query->selectRaw(
             'CASE
             WHEN discount_start_date <= now()
@@ -123,34 +127,33 @@ class Book extends Model
     {
         if ($request->has('rating_start')) {
             $query->where('rating_start', '>=', $request->rating_start)
-            ->orderBy('rating_start','asc')
-            ->groupBy('rating_start');
+                ->orderBy('rating_start', 'asc')
+                ->groupBy('rating_start');
         }
         return $query;
     }
 
-    public function scopeBookDetail($query){
+    public function scopeBookDetail($query)
+    {
         return $query
             ->leftjoin('author', 'book.author_id', 'author.id')
             ->leftjoin('discount', 'discount.book_id', 'book.id')
+            ->leftjoin('category', 'book.category_id', 'category.id')
             ->select(
                 'book.id',
                 'book.book_cover_photo',
                 'book.book_title',
                 'book.book_summary',
                 'author.author_name',
+                'category.category_name',
                 'book.book_price',
                 'discount.discount_price',
-                'discount.discount_start_date',
-                'discount.discount_end_date'
-                
             )
             ->selectRaw('CASE
                         WHEN (discount_end_date IS NULL AND DATE(NOW()) >= discount_start_date) THEN book_price - discount_price
                         WHEN (discount_end_date IS NOT NULL AND ( DATE(NOW()) >= discount_start_date AND DATE(NOW()) <= discount_end_date ) ) THEN book_price - discount_price
                         ELSE 0
                         END AS sub_price')
-            ->groupBy('book.id', 'discount.id', 'author.id');
-         
+            ->groupBy('book.id', 'discount.id', 'author.id', 'category.id');
     }
 }

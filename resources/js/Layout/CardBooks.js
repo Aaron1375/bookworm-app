@@ -1,30 +1,34 @@
 import React from "react";
 import { Card, ListGroup } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import IMAGES from "../../assets/bookcover/images";
 
 export default function CardBooks(props) {
-    
+
+    const {book} = props
+    const clickDetail = () => {
+        // console.log(book.id)
+    }
     return (
         <div className="col-3 justify-content-center mt-2 ml-2">
-            <Link className="text-content" to="/detail">
+            <Link className="text-content" to={`/detail/${book.id}`}>
             <Card>
                 <Card.Img
                     variant="top"
-                    src={IMAGES[props.book.book_cover_photo]}
+                    src={IMAGES[book.book_cover_photo]}
                     alt="image1"
                     height={"300px"}
                 />
                 <Card.Body>
-                    <Card.Title>{props.book.book_title}</Card.Title>
+                    <Card.Title>{book.book_title}</Card.Title>
                     <Card.Text style={{ fontSize: "12px" }}>
-                        {props.author_name}
+                        {book.author_name}
                     </Card.Text>
                 </Card.Body>
                 <ListGroup variant="flush">
                     <ListGroup.Item>
-                        <del style={{ fontSize: "12px" }}>{props.book.discount_price ? "$"+props.book.book_price : ""}</del>{" "}
-                        <b>{props.book.discount_price ? "$" + props.book.discount_price : "$" + props.book.book_price}</b>
+                        <del style={{ fontSize: "12px" }}>{book.discount_price ? "$"+props.book.book_price : ""}</del>{" "}
+                        <b>{book.discount_price ? "$" + book.discount_price : "$" + props.book.book_price}</b>
                     </ListGroup.Item>
                 </ListGroup>
             </Card>

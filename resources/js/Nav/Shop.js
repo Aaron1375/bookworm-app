@@ -2,30 +2,16 @@ import Filter from "../Layout/Shop/Aside";
 import Content from "../Layout/Shop/Content";
 import { React, useEffect, useState } from "react";
 import DropdownShop from "../Layout/Shop/DropdownShop";
-import axios from 'axios';
 function Shop() {
-    const [show, setShow] = useState([]);
-    const baseURL = "http://127.0.0.1:8000/api/show?onsale=desc&per_page=15";
-
-    useEffect(() => {
-        axios
-            .get(baseURL)
-            .then((response) => {
-                const books = response.data.data;
-                // console.log(books);
-                setShow(books);
-            })
-            .catch((error) => console.error(`Error: ${error}`));
-            // console.log(response);
-
-    }, []);
+    const [authors, setAuthors] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     return (
         <div className="container mt-5">
             <div className="wrapper">
                 <h2>Books</h2>
                 <div>&nbsp;</div>
-                <h5 className="mt-2">(Filtered by Category01)</h5>
+                <h5 className="mt-2">(Filtered by {categories.id})</h5>
             </div>
 
             <hr />
@@ -33,7 +19,7 @@ function Shop() {
             <div className="row">
                 <div className="col-2">
                     <b>Filter by</b>
-                    <Filter show={show}/>
+                    <Filter setAuthors={setAuthors}/>
                 </div>
 
                 <div className="col ml-auto">
@@ -41,7 +27,7 @@ function Shop() {
                         <p>Showing 1-12 of 123 books</p>
                         <DropdownShop />
                     </div>
-                    <Content show={show}/>
+                    <Content/>
                 </div>
             </div>
         </div>

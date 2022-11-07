@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import {
     Button,
     Card,
@@ -9,13 +9,35 @@ import {
     Row,
 } from "react-bootstrap";
 import book1 from "../../../assets/bookcover/book1.jpg";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import axios from 'axios';
+import IMAGES from "../../../assets/bookcover/images";
+
+
 
 export default function Detail() {
+    const {id} = useParams();
+    // console.log(id)
+    const [showDetail, setShowDetail] = useState({});
+    const baseURL = `http://127.0.0.1:8000/api/bookdetail/${id}`;
+    // console.log(id);
+    useEffect(() => {
+        axios
+            .get(baseURL)
+            .then((response) => {
+                const book = response.data;
+                console.log(book);
+                setShowDetail(book);
+            })
+            .catch((error) => console.error(`Error: ${error}`));
+
+    }, []);
+    // console.log(id);
+
     return (
         <Container className="mt-5">
             <div>
-                <h2>Category Name</h2>
+                <h2>{showDetail.category_name}</h2>
             </div>
             <hr />
             {/* Product Detail */}
@@ -25,33 +47,20 @@ export default function Detail() {
                         <Col xs={3}>
                             <Card.Img
                                 variant="top"
-                                src={book1}
+                                src={IMAGES[showDetail.book_cover_photo]}
                                 alt=""
                                 height={"250px"}
                             />
                             <p className="font-weight-light text-aligh-right mt-3">
-                                By (author) <b>Anna Banks</b>
+                                By (author) <b>{showDetail.author_name}</b>
                             </p>
                         </Col>
                         <Col xs={8} className="justify-content-right">
                             <div className="m-2 p-2">
-                                <h4>Book Title</h4>
+                                <h4>{showDetail.book_title}</h4>
                                 <p>Book description</p>
                                 <p>
-                                    Lorem Ipsum is simply dummy text of the
-                                    printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard dummy
-                                    text ever since the 1500s, when an unknown
-                                    printer took a galley of type and scrambled
-                                    it to make a type specimen book. It has
-                                    survived not only five centuries, but also
-                                    the leap into electronic typesetting,
-                                    remaining essentially unchanged. It was
-                                    popularised in the 1960s with the release of
-                                    Letraset sheets containing Lorem Ipsum
-                                    passages, and more recently with desktop
-                                    publishing software like Aldus PageMaker
-                                    including versions of Lorem Ipsum.
+                                    {showDetail.book_summary}
                                 </p>
                             </div>
                         </Col>
@@ -61,11 +70,11 @@ export default function Detail() {
                     <Card>
                         <Card.Header className="wrapper ">
                             <h5 className="fw-lighter align-self-center">
-                              &nbsp;&nbsp;
-                              <del>$82.99</del>
-                              &nbsp;&nbsp;
+                                &nbsp;&nbsp;
+                                <del>{showDetail.discount_price ? "$"+showDetail.book_price : ""}</del>{" "}
+                                &nbsp;&nbsp;
                             </h5>
-                            <h1> $29.99</h1>
+                            <h1>{showDetail.discount_price ? "$" + showDetail.discount_price : "$" + showDetail.book_price}</h1>
                         </Card.Header>
                         <Card.Body className="text-center">
                             <Card.Title>Quantity</Card.Title>

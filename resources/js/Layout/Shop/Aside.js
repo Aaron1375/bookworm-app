@@ -2,6 +2,7 @@ import { Button, Card } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Filter() {
     const [authors, setAuthor] = useState([]);
@@ -15,7 +16,6 @@ function Filter() {
             .get(authorURL)
             .then((response) => {
                 const getAuthor = response.data;
-                // console.log(getAuthor);
                 setAuthor(getAuthor);
             })
             .catch((error) => console.error(`Error: ${error}`));
@@ -29,6 +29,14 @@ function Filter() {
             })
             .catch((error) => console.error(`Error: ${error}`));
     }, []);
+
+    const handleAuthor = (e) => {
+        console.log(e);
+    }
+
+    const categoryID = (value) => {
+        console.log(value)
+    }
 
     return (
         <>
@@ -48,8 +56,8 @@ function Filter() {
                             <ul className="text-left">
                                 {categories.map((category, index) => {
                                     return (
-                                        <li key={index} className="mt-2">
-                                            <a href="#/shop" className="text-content">
+                                        <li key={index} className="mt-2" value={category.id} onClick={categoryID}>
+                                            <a href={`#/shop/category/${category.id}`} className="text-content">
                                                 {category.category_name}
                                             </a>
                                         </li>
@@ -74,7 +82,7 @@ function Filter() {
                                 {authors.map((author, index) => {
                                     return (
                                         <li key={index} className="mt-2">
-                                            <a href="#/shop" className="text-content">
+                                            <a href={`#/shop/author/${author.id}`} value={author.id} className="text-content" onClick={handleAuthor}>
                                                 {author.author_name}
                                             </a>
                                         </li>
@@ -99,7 +107,7 @@ function Filter() {
                                 {stars.map((star, index) => {
                                     return (
                                         <li key={index} className="mt-2">
-                                            <a href="#/shop" className="text-content">
+                                            <a href={`#/shop/star/${star}`} value={star} className="text-content">
                                                 {star}&nbsp;&nbsp;Star
                                             </a>
                                         </li>

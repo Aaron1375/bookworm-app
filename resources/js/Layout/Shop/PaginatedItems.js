@@ -1,53 +1,53 @@
-// import React, { useEffect, useState } from 'react';
-// import ReactPaginate from 'react-paginate';
+import React, { useState, useEffect } from "react";
+import ReactPaginate from "react-paginate";
+import Filter from "./Aside";
 
+export default function PaginatedItems({ itemsPerPage }) {
+    const [pageCount, setPageCount] = useState(0);
+    const [itemOffset, setItemOffset] = useState(0);
+    const [currentItems, setCurrentItems] = useState(null);
 
-// // Example items, to simulate fetching from another resources.
+    const [total, setTotal] = useState("");
 
-// export default function PaginatedItems(props) {
-//     const { book } = props;
-//     const [currentItems, setCurrentItems] = useState([]);
-//     const [pageCount, setPageCount] = useState(0);
-//     const [itemOffset, setItemOffset] = useState(0);
-//     const itemsPerPage = 6;
+    const [postPerPage, setPostPerPage] = useState(20);
+    const [page, setPage] = useState(1);
 
-//     useEffect(() => {
-//         const endOffset = itemOffset + itemsPerPage;
-//         console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-//         setCurrentItems(book.slice(itemOffset, endOffset));
-//         setPageCount(Math.ceil(book.length / itemsPerPage));
-//     }, [itemOffset, itemsPerPage, book]);
+    const lastPage = page * postPerPage;
+    const firstPage = lastPage - postPerPage;
+    const currentPost = books.slice(firstPage, lastPage)
 
-//     const handlePageClick = (event) => {
-//         const newOffset = (event.selected * itemsPerPage) % book.length;
-//         console.log(
-//             `User requested page number ${event.selected}, which is offset ${newOffset}`
-//         );
-//         setItemOffset(newOffset);
-//     };
-
-//     return (
-//         <>  
-//             <div className=''>
-//                 {currentItems.map((book) => {
-//                     return (
-//                         <div>   
-//                             {book.book_title}
-//                         </div>
-//                     )
-//                 })}
-//             </div>
-//             <ReactPaginate
-//                 breakLabel="..."
-//                 nextLabel="next >"
-//                 onPageChange={handlePageClick}
-//                 pageRangeDisplayed={5}
-//                 pageCount={pageCount}
-//                 previousLabel="< previous"
-//                 renderOnZeroPageCount={null}
-//             />
-//         </>
-//     );
-// }
-
-// // Add a <div id="container"> to your HTML to see the componend rendered.
+    useEffect(() => {
+        // Fetch items from another resources.
+        const endOffset = itemOffset + itemsPerPage;
+        console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+        setCurrentItems(items.slice(itemOffset, endOffset));
+        setPageCount(Math.ceil(items.length / itemsPerPage));
+    }, [itemOffset, itemsPerPage]);
+    return (
+        <>
+            <ReactPaginate
+                nextLabel="next >"
+                onPageChange={(event) => {
+                    setItemOffset((event.selected * perPage) % lastPage)
+                        setCurrentItems(event.selected);
+                }}
+                pageRangeDisplayed={3}
+                marginPagesDisplayed={2}
+                pageCount={lastPage}
+                previousLabel="< previous"
+                pageClassName="page-item"
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+                breakLabel="..."
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName="pagination"
+                activeClassName="active"
+                renderOnZeroPageCount={null}
+            />
+        </>
+    );
+}

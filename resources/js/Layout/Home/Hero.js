@@ -4,6 +4,7 @@ import Carousel from "react-multi-carousel";
 import { Card, ListGroup } from "react-bootstrap";
 import "react-multi-carousel/lib/styles.css";
 import IMAGES from "../../../assets/bookcover/images";
+import {Link} from 'react-router-dom';
 const responsive = {
     superLargeDesktop: {
         // the naming can be any, depends on you.
@@ -44,31 +45,36 @@ function Hero() {
     return (
         <Carousel responsive={responsive}>
             {discount.map((book, index) => {
-                return <div className="cards-wrapper" key={index}>
-                    <Card style={{ width: "18rem" }}>
-                        <Card.Img
-                            variant="top"
-                            src={IMAGES[book.book_cover_photo]}
-                            alt=""
-                            height={"300px"}
-                        />
-                        <Card.Body>
-                            <Card.Title>{book.book_title}</Card.Title>
-                            <Card.Text style={{ fontSize: "12px" }}>
-                                {book.author_name}
-                            </Card.Text>
-                        </Card.Body>
-                        <ListGroup variant="flush">
-                            <ListGroup.Item>
-                                <del style={{ fontSize: "12px" }}>{book.book_price}</del>{" "}
-                                <b>{book.discount_price}</b>
-                            </ListGroup.Item>
-                        </ListGroup>
-                    </Card>
-                </div>
+                return (
+                    <div className="cards-wrapper" key={index}>
+                            <Link className="text-content" to={`/detail/${book.id}`}>
+                            <Card style={{ width: "18rem" }}>
+                                <Card.Img
+                                    variant="top"
+                                    src={IMAGES[book.book_cover_photo]}
+                                    alt=""
+                                    height={"300px"}
+                                />
+                                <Card.Body>
+                                    <Card.Title>{book.book_title}</Card.Title>
+                                    <Card.Text style={{ fontSize: "12px" }}>
+                                        {book.author_name}
+                                    </Card.Text>
+                                </Card.Body>
+                                <ListGroup variant="flush">
+                                    <ListGroup.Item>
+                                        <del style={{ fontSize: "12px" }}>
+                                            {book.book_price}
+                                        </del>{" "}
+                                        <b>{book.discount_price}</b>
+                                    </ListGroup.Item>
+                                </ListGroup>
+                            </Card>
+                            </Link>
+                            {/* <CardBooks book={book} key={index} /> */}
+                    </div>
+                );
             })}
-            
-
         </Carousel>
     );
 }

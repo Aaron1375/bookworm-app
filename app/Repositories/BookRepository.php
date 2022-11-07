@@ -115,10 +115,14 @@ class BookRepository
     public function findById($id)
     {
         // $book = Book::bookDetail();
+        
         $book = Book::bookDetail();
-
         $book->find($id);
 
-        return $book->get();
+        return $book->first();
+
+        // return response()->json([
+        //     'data' => $book->get()
+        // ]);
     }
 }
