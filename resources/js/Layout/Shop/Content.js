@@ -33,7 +33,7 @@ export default function Content() {
                 )
                 .then((response) => {
                     const books = response.data.data;
-                    // console.log(books);
+                    console.log(books);
                     setShow(books);
                 })
                 .catch((error) => console.error(`Error: ${error}`));

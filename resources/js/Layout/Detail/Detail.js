@@ -11,12 +11,27 @@ import {
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import IMAGES from "../../../assets/bookcover/images";
-
 export default function Detail() {
     const [count, setCount] = useState(0);
+    const [sortValue, setSortValue] = useState("");
+    const [pageValue, setPageValue] = useState("");
+    const handleSelect = (e) => {
+        setSortValue(e);
+        // Call api eventKey
+        loadReview(e);
+    };
 
+    const handlePageValue = (e) => {
+        // console.log(e);
+        setPageValue(e)
+        // Call api eventKey
+        loadPage(e)
+    };
     const increment = () => {
         setCount(count + 1);
+        if (count == 8) {
+            setCount(8);
+        }
     };
 
     const decrement = () => {
@@ -31,6 +46,72 @@ export default function Detail() {
     const [showReview, setShowReview] = useState([]);
     const baseURL = `http://127.0.0.1:8000/api/bookdetail/${id}`;
     const reviewUrl = `http://127.0.0.1:8000/api/bookdetail/review/${id}?`;
+    const reviewPage = `http://127.0.0.1:8000/api/bookdetail/review/${id}?`;
+
+    const loadReview = async (e) => {
+
+        if (e === "Date: newest to oldest") {
+            await axios
+                .get(reviewUrl + `sort=new_to_old&`)
+                .then((res) => {
+                    const review = res.data;
+                    console.log(review);
+                    setShowReview(review);
+                })
+                .catch((error) => console.error(`Error: ${error}`));
+                console.log(newReview);
+        } else if (e === "Date: oldest to newest") {
+            await axios
+                .get(reviewUrl + `sort=old_to_new&`)
+                .then((res) => {
+                    const review = res.data;
+                    console.log(review);
+                    setShowReview(review);
+                })
+                .catch((error) => console.error(`Error: ${error}`));
+                console.log(newReview);
+        }
+    };
+
+    const loadPage = async (e) => {
+        if (e === "25") {
+            axios
+                .get(reviewPage + `per_page=25&`)
+                .then((res) => {
+                    const review = res.data;
+                    console.log(review);
+                    setShowReview(review);
+                })
+                .catch((error) => console.error(`Error: ${error}`));
+        } else if (e === "20") {
+            axios
+                .get(reviewPage + `per_page=20&`)
+                .then((res) => {
+                    const review = res.data;
+                    console.log(review);
+                    setShowReview(review);
+                })
+                .catch((error) => console.error(`Error: ${error}`));
+        } else if (e === "15") {
+            axios
+                .get(reviewUrl + `per_page=15&`)
+                .then((res) => {
+                    const review = res.data;
+                    console.log(review);
+                    setShowReview(review);
+                })
+                .catch((error) => console.error(`Error: ${error}`));
+        } else if (e === "5") {
+            axios
+                .get(reviewUrl + `per_page=5&`)
+                .then((res) => {
+                    const review = res.data;
+                    console.log(review);
+                    setShowReview(review);
+                })
+                .catch((error) => console.error(`Error: ${error}`));
+        }
+    };
     // console.log(id);
     useEffect(() => {
         axios
@@ -41,15 +122,14 @@ export default function Detail() {
             })
             .catch((error) => console.error(`Error: ${error}`));
 
-        axios  
+        axios
             .get(reviewUrl)
             .then((res) => {
                 const review = res.data;
-                console.log(review)
-                setShowReview(review)
+                console.log(review);
+                setShowReview(review);
             })
             .catch((error) => console.error(`Error: ${error}`));
-    
     }, []);
 
     const round = (x) => {
@@ -165,60 +245,77 @@ export default function Detail() {
                             <div className="wrapper mt-3 ">
                                 <p>Showing 1-12 of 3134 reviews</p>
                                 <div className="wrapper row ml-5 ms-auto">
-                                    <DropdownButton
-                                        className="col"
+                                    <Dropdown
+                                        className="btn-drop-down col"
+                                        variant="secondary"
                                         id="dropdown-basic-button"
-                                        title="Dropdown button"
+                                        alignRight
+                                        onSelect={handleSelect}
                                     >
-                                        <Dropdown.Item href="#/action-1">
-                                            Action
-                                        </Dropdown.Item>
-                                        <Dropdown.Item href="#/action-2">
-                                            Another action
-                                        </Dropdown.Item>
-                                        <Dropdown.Item href="#/action-3">
-                                            Something else
-                                        </Dropdown.Item>
-                                    </DropdownButton>
-                                    <DropdownButton
+                                        <Dropdown.Toggle
+                                            variant="secondary"
+                                            id="dropdown-basic"
+                                        >
+                                            Sort By {sortValue}
+                                        </Dropdown.Toggle>
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item eventKey="Date: newest to oldest">
+                                                Date: newest to oldest
+                                            </Dropdown.Item>
+                                            <Dropdown.Item eventKey="Date: oldest to newest">
+                                                Date: oldest to newest
+                                            </Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+
+                                    <Dropdown
                                         className="col"
-                                        id="dropdown-basic-button"
-                                        title="Dropdown button"
+                                        onSelect={handlePageValue}
                                     >
-                                        <Dropdown.Item href="#/action-1">
-                                            Action
-                                        </Dropdown.Item>
-                                        <Dropdown.Item href="#/action-2">
-                                            Another action
-                                        </Dropdown.Item>
-                                        <Dropdown.Item href="#/action-3">
-                                            Something else
-                                        </Dropdown.Item>
-                                    </DropdownButton>
+                                        <Dropdown.Toggle
+                                            variant="secondary"
+                                            id="dropdown-basic"
+                                        >
+                                            Show {pageValue}
+                                        </Dropdown.Toggle>
+
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item eventKey="25">
+                                                Show 25
+                                            </Dropdown.Item>
+                                            <Dropdown.Item eventKey="20">
+                                                Show 20
+                                            </Dropdown.Item>
+                                            <Dropdown.Item eventKey="15">
+                                                Show 15
+                                            </Dropdown.Item>
+                                            <Dropdown.Item eventKey="5">
+                                                Show 5
+                                            </Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
                                 </div>
                             </div>
                             {/* REVIEW */}
 
                             {showReview.map((review, index) => {
-                                return(
+                                return (
                                     <div key={index}>
                                         <div className="wrapper bottom-0 mt-4">
                                             <h4>{review.review_title}</h4>
-                                            <p>&nbsp;|&nbsp; {review.rating_start} star</p>
+                                            <p>
+                                                &nbsp;|&nbsp;{" "}
+                                                {review.rating_start} star
+                                            </p>
                                         </div>
-                                        <p>
-                                            {review.review_details}
-                                        </p>
+                                        <p>{review.review_details}</p>
                                         <p>{review.review_date}</p>
                                         <hr />
                                     </div>
-                                )
+                                );
                             })}
-
-                           
                         </Col>
                     </Row>
-
                 </Col>
             </Row>
         </Container>
