@@ -22,4 +22,9 @@ class Review extends Model
             ->groupBy('rating_start')
             ->get();
     }
+
+    public function scopeGetCountStar($query){
+        $query -> selectRow('Count(rating_start) as rating, rating_start');
+    }
+
 }

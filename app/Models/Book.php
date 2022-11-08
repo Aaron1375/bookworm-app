@@ -139,6 +139,8 @@ class Book extends Model
             ->leftjoin('author', 'book.author_id', 'author.id')
             ->leftjoin('discount', 'discount.book_id', 'book.id')
             ->leftjoin('category', 'book.category_id', 'category.id')
+            ->leftjoin('review', 'book.id', 'review.book_id')
+
             ->select(
                 'book.id',
                 'book.book_cover_photo',
@@ -153,7 +155,8 @@ class Book extends Model
                         WHEN (discount_end_date IS NULL AND DATE(NOW()) >= discount_start_date) THEN book_price - discount_price
                         WHEN (discount_end_date IS NOT NULL AND ( DATE(NOW()) >= discount_start_date AND DATE(NOW()) <= discount_end_date ) ) THEN book_price - discount_price
                         ELSE 0
-                        END AS sub_price')
+                        END AS sub_price,
+                        COALESCE(AVG(review.rating_start), 0.0) as rating_start')
             ->groupBy('book.id', 'discount.id', 'author.id', 'category.id');
     }
 }

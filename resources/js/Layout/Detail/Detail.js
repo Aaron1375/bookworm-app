@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
     Button,
     Card,
@@ -8,31 +8,53 @@ import {
     DropdownButton,
     Row,
 } from "react-bootstrap";
-import book1 from "../../../assets/bookcover/book1.jpg";
 import { Link, useParams } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import IMAGES from "../../../assets/bookcover/images";
 
-
-
 export default function Detail() {
-    const {id} = useParams();
+    const [count, setCount] = useState(0);
+
+    const increment = () => {
+        setCount(count + 1);
+    };
+
+    const decrement = () => {
+        setCount(count - 1);
+        if (count == 0) {
+            setCount(0);
+        }
+    };
+    const { id } = useParams();
     // console.log(id)
     const [showDetail, setShowDetail] = useState({});
+    const [showReview, setShowReview] = useState([]);
     const baseURL = `http://127.0.0.1:8000/api/bookdetail/${id}`;
+    const reviewUrl = `http://127.0.0.1:8000/api/bookdetail/review/${id}?`;
     // console.log(id);
     useEffect(() => {
         axios
             .get(baseURL)
             .then((response) => {
                 const book = response.data;
-                console.log(book);
                 setShowDetail(book);
             })
             .catch((error) => console.error(`Error: ${error}`));
 
+        axios  
+            .get(reviewUrl)
+            .then((res) => {
+                const review = res.data;
+                console.log(review)
+                setShowReview(review)
+            })
+            .catch((error) => console.error(`Error: ${error}`));
+    
     }, []);
-    // console.log(id);
+
+    const round = (x) => {
+        return Number.parseFloat(x).toFixed(2);
+    };
 
     return (
         <Container className="mt-5">
@@ -59,9 +81,7 @@ export default function Detail() {
                             <div className="m-2 p-2">
                                 <h4>{showDetail.book_title}</h4>
                                 <p>Book description</p>
-                                <p>
-                                    {showDetail.book_summary}
-                                </p>
+                                <p>{showDetail.book_summary}</p>
                             </div>
                         </Col>
                     </Row>
@@ -71,18 +91,48 @@ export default function Detail() {
                         <Card.Header className="wrapper ">
                             <h5 className="fw-lighter align-self-center">
                                 &nbsp;&nbsp;
-                                <del>{showDetail.discount_price ? "$"+showDetail.book_price : ""}</del>{" "}
+                                <del>
+                                    {showDetail.discount_price
+                                        ? "$" + showDetail.book_price
+                                        : ""}
+                                </del>{" "}
                                 &nbsp;&nbsp;
                             </h5>
-                            <h1>{showDetail.discount_price ? "$" + showDetail.discount_price : "$" + showDetail.book_price}</h1>
+                            <h1>
+                                {showDetail.discount_price
+                                    ? "$" + showDetail.discount_price
+                                    : "$" + showDetail.book_price}
+                            </h1>
                         </Card.Header>
-                        <Card.Body className="text-center">
+                        <Card.Body className="col">
                             <Card.Title>Quantity</Card.Title>
-                            <Card.Text>
-                                With supporting text below as a natural lead-in
-                                to additional content.
-                            </Card.Text>
-                            <Button variant="primary">Go somewhere</Button>
+                            <Row className="p-0 m-auto bg-secondary">
+                                <Button
+                                    onClick={decrement}
+                                    className="col-5 justify-content-end"
+                                    variant="secondary"
+                                >
+                                    -
+                                </Button>
+                                <p className="col text-white mt-2 fs-5">
+                                    {count}
+                                </p>
+                                <Button
+                                    onClick={increment}
+                                    className="col-5 pl-1"
+                                    variant="secondary"
+                                >
+                                    +
+                                </Button>
+
+                                <div className="mt-3 m-auto">
+                                    <Row>
+                                        <Button variant="secondary">
+                                            Add to cart
+                                        </Button>
+                                    </Row>
+                                </div>
+                            </Row>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -101,7 +151,8 @@ export default function Detail() {
                                 &nbsp;&nbsp;
                                 <p className="fw-lighter">(Filter by 5 star)</p>
                             </div>
-                            <h1>4.6 Star</h1>
+                            {/* AVG */}
+                            <h1>{round(showDetail.rating_start)} Star</h1>
                             <div className="review-star">
                                 <Link>(3.132)</Link> &nbsp;&nbsp;
                                 <Link>5 star (200)</Link> |&nbsp;
@@ -148,96 +199,26 @@ export default function Detail() {
                             </div>
                             {/* REVIEW */}
 
-                            <div>
-                                <div className="wrapper bottom-0 mt-4">
-                                    <h4>Review Title</h4>
-                                    <p>&nbsp;|&nbsp; 5 star</p>
-                                </div>
-                                <p>
-                                    Review Content: centuries, but also the leap
-                                    into electronic typesetting, remaining
-                                    essentially unchanged. It was popularised in
-                                    the 1960s with the release of Letraset
-                                    sheets containing Lorem Ipsum passages, and
-                                    more recently with desktop publishing
-                                    software like Aldus PageMaker including{" "}
-                                </p>
-                                <p>month date year</p>
-                                <hr />
-                            </div>
+                            {showReview.map((review, index) => {
+                                return(
+                                    <div key={index}>
+                                        <div className="wrapper bottom-0 mt-4">
+                                            <h4>{review.review_title}</h4>
+                                            <p>&nbsp;|&nbsp; {review.rating_start} star</p>
+                                        </div>
+                                        <p>
+                                            {review.review_details}
+                                        </p>
+                                        <p>{review.review_date}</p>
+                                        <hr />
+                                    </div>
+                                )
+                            })}
 
-                            <div>
-                                <div className="wrapper bottom-0 mt-4">
-                                    <h4>Review Title</h4>
-                                    <p>&nbsp;|&nbsp; 5 star</p>
-                                </div>
-                                <p>
-                                    Review Content: centuries, but also the leap
-                                    into electronic typesetting, remaining
-                                    essentially unchanged. It was popularised in
-                                    the 1960s with the release of Letraset
-                                    sheets containing Lorem Ipsum passages, and
-                                    more recently with desktop publishing
-                                    software like Aldus PageMaker including{" "}
-                                </p>
-                                <p>month date year</p>
-                                <hr />
-                            </div>
-                            <div>
-                                <div className="wrapper bottom-0 mt-4">
-                                    <h4>Review Title</h4>
-                                    <p>&nbsp;|&nbsp; 5 star</p>
-                                </div>
-                                <p>
-                                    Review Content: centuries, but also the leap
-                                    into electronic typesetting, remaining
-                                    essentially unchanged. It was popularised in
-                                    the 1960s with the release of Letraset
-                                    sheets containing Lorem Ipsum passages, and
-                                    more recently with desktop publishing
-                                    software like Aldus PageMaker including{" "}
-                                </p>
-                                <p>month date year</p>
-                                <hr />
-                            </div>
-                            <div>
-                                <div className="wrapper bottom-0 mt-4">
-                                    <h4>Review Title</h4>
-                                    <p>&nbsp;|&nbsp; 5 star</p>
-                                </div>
-                                <p>
-                                    Review Content: centuries, but also the leap
-                                    into electronic typesetting, remaining
-                                    essentially unchanged. It was popularised in
-                                    the 1960s with the release of Letraset
-                                    sheets containing Lorem Ipsum passages, and
-                                    more recently with desktop publishing
-                                    software like Aldus PageMaker including{" "}
-                                </p>
-                                <p>month date year</p>
-                                <hr />
-                            </div>
-                            <div>
-                                <div className="wrapper bottom-0 mt-4">
-                                    <h4>Review Title</h4>
-                                    <p>&nbsp;|&nbsp; 5 star</p>
-                                </div>
-                                <p>
-                                    Review Content: centuries, but also the leap
-                                    into electronic typesetting, remaining
-                                    essentially unchanged. It was popularised in
-                                    the 1960s with the release of Letraset
-                                    sheets containing Lorem Ipsum passages, and
-                                    more recently with desktop publishing
-                                    software like Aldus PageMaker including{" "}
-                                </p>
-                                <p>month date year</p>
-                                <hr />
-                            </div>
+                           
                         </Col>
                     </Row>
 
-                    {/* REVIEW */}
                 </Col>
             </Row>
         </Container>

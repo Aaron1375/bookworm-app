@@ -2,10 +2,12 @@ import { React, useEffect, useState } from "react";
 import axios from "axios";
 import CardBooks from "../CardBooks";
 import { useParams } from "react-router-dom";
-import { Pagination } from "@mui/material";
 
 export default function Content() {
     const [show, setShow] = useState([]);
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const [postsPerPage, setPostsPerPage] = useState(10);
+
     const baseURL = "http://127.0.0.1:8000/api/show?onsale=desc&per_page=15";
 
     const param = useParams();
@@ -31,7 +33,7 @@ export default function Content() {
                 )
                 .then((response) => {
                     const books = response.data.data;
-                    console.log(books);
+                    // console.log(books);
                     setShow(books);
                 })
                 .catch((error) => console.error(`Error: ${error}`));
@@ -61,15 +63,24 @@ export default function Content() {
     };
 
     useEffect(() => {
-        loadProduct();
+        loadProduct();    
     }, []);
+
+    // Get current book
+    // const indexOfLastPost = currentPage * postsPerPage;
+    // const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    // const currentPosts = show.slice(indexOfFirstPost, indexOfLastPost);
+
     return (
         <div className="row">
+
+        {/* return <CardBooks show={currentPosts}/>; */}
+
+
             {show.map((book, index) => {
                 return <CardBooks book={book} key={index} />;
             })}
-            {/* <PaginatedItems/> */}
-            <Pagination count={5} />
+            
         </div>
     );
 }

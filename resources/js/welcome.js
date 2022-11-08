@@ -25,7 +25,6 @@ class Welcome extends Component {
                     <Route exact path="shop/category/:categoryId" element={<Shop />} />
                     <Route exact path="shop/author/:authorId" element={<Shop />} />
                     <Route exact path="shop/star/:star" element={<Shop />} />
-
                     
                 </Routes>
                 </Container>
