@@ -9,6 +9,7 @@ function Header() {
         <nav>
             <Navbar bg="dark" variant="dark">
                 <Container>
+                    {/* NAVBAR */}
                     <Navbar.Brand href="#/">
                         <img
                         width={64}
@@ -23,8 +24,6 @@ function Header() {
                         <Link to="/about">About</Link>
                         <Link to="/cart">Cart</Link>
 
-                        {/* <LoginDropdown/>
-                        <LoginModal/> */}
                         {localStorage.getItem("user") ? (
                             <>
                                 <LoginDropdown />

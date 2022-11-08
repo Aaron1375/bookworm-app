@@ -9,20 +9,20 @@ function Feature() {
     const baseURL = "http://127.0.0.1:8000/api/home/recommended";
 
     useEffect(() => {
+        // API GET RECOMMENDED BOOKS
         axios
             .get(baseURL)
             .then((response) => {
                 const topRecommended = response.data.data;
-                // console.log(topRecommended);
                 setRecommended(topRecommended);
             })
             .catch((error) => console.error(`Error: ${error}`));
 
+        //API GET POPULAR BOOKS
         axios
             .get("http://127.0.0.1:8000/api/home/popular")
             .then((response) => {
                 const topPopular = response.data.data;
-                // console.log(topPopular);
                 setPopular(topPopular);
             })
             .catch((error) => console.error(`Error: ${error}`));
@@ -30,6 +30,7 @@ function Feature() {
 
     return (
         <div>
+            {/* TAB */}
             <Tabs
                 defaultActiveKey="recommended"
                 transition={false}
@@ -38,6 +39,7 @@ function Feature() {
             >
                 <Tab eventKey="recommended" title="Recommended">
                     <div className="row">
+                        {/* LOOP THE BOOKS */}
                         {recommended.map((book, index) => {
                             return <CardBooks book={book} key={index} />;
                         })}
@@ -45,6 +47,7 @@ function Feature() {
                 </Tab>
                 <Tab eventKey="popular" title="Popular">
                     <div className="row">
+                        {/* LOOP THE BOOKS */}
                         {popular.map((book, index) => {
                             return <CardBooks book={book} key={index} />;
                         })}

@@ -12,6 +12,7 @@ function Filter() {
     const categoryURL = "http://127.0.0.1:8000/api/category";
 
     useEffect(() => {
+        // API GET author name
         axios
             .get(authorURL)
             .then((response) => {
@@ -20,6 +21,7 @@ function Filter() {
             })
             .catch((error) => console.error(`Error: ${error}`));
 
+        // API GET category name
         axios
             .get(categoryURL)
             .then((response) => {
@@ -40,6 +42,7 @@ function Filter() {
 
     return (
         <>
+            {/* CATEGORY */}
             <Accordion defaultActiveKey="0">
                 <Card className="mb-2 mt-3">
                     <Card.Header>
@@ -69,6 +72,7 @@ function Filter() {
                 </Card>
             </Accordion>
 
+            {/* AUTHOR */}
             <Accordion defaultActiveKey="0">
                 <Card className="mb-2">
                     <Card.Header>
@@ -94,6 +98,7 @@ function Filter() {
                 </Card>
             </Accordion>
 
+            {/* STAR */}
             <Accordion defaultActiveKey="0">
                 <Card className="mb-2">
                     <Card.Header>

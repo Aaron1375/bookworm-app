@@ -4,12 +4,12 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 function LoginModal() {
-    // setshow modal
+    // SETSHOW
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    // login function
+    // LOGIN FUNCTION
     let navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -25,7 +25,7 @@ function LoginModal() {
                         password: password,
                     })
                     .then((response) => {
-                        //set response in local storage
+                        //SET RESPONSE TO LOCAL STORAGE
                         // console.log(response.data.token);
                         localStorage.setItem(
                             "user",
@@ -48,6 +48,7 @@ function LoginModal() {
 
     return (
         <>
+        {/* SHOW MODAL FORM WHEN CLICK THE LOGIN */}
             <Button variant="dark" onClick={handleShow}>
                 Login
             </Button>

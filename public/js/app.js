@@ -8741,9 +8741,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function CardBooks(props) {
   var book = props.book;
-  var clickDetail = function clickDetail() {
-    // console.log(book.id)
-  };
+  // CARD BOOK
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     className: "col-3 justify-content-center mt-2 ml-2",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
@@ -8839,22 +8837,29 @@ function Detail() {
     pageValue = _useState6[0],
     setPageValue = _useState6[1];
   var handleSelect = function handleSelect(e) {
+    // SORT DATE
     setSortValue(e);
-    // Call api eventKey
+    // CALL API BY EVENKEY
     loadReview(e);
   };
+
+  // SORT PAGE
   var handlePageValue = function handlePageValue(e) {
     // console.log(e);
     setPageValue(e);
-    // Call api eventKey
+    // CALL API BY EVENKEY
     loadPage(e);
   };
+
+  // +1 WHEN CLICK THE BUTTON
   var increment = function increment() {
     setCount(count + 1);
     if (count == 8) {
       setCount(8);
     }
   };
+
+  // -1 WHEN CLICK THE BUTTON
   var decrement = function decrement() {
     setCount(count - 1);
     if (count == 0) {
@@ -8875,6 +8880,8 @@ function Detail() {
   var baseURL = "http://127.0.0.1:8000/api/bookdetail/".concat(id);
   var reviewUrl = "http://127.0.0.1:8000/api/bookdetail/review/".concat(id, "?");
   var reviewPage = "http://127.0.0.1:8000/api/bookdetail/review/".concat(id, "?");
+
+  // API SORT REVIEW
   var loadReview = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -8923,12 +8930,15 @@ function Detail() {
       return _ref.apply(this, arguments);
     };
   }();
+
+  // SORT BY PAGE
   var loadPage = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e) {
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
+              // 25
               if (e === "25") {
                 axios__WEBPACK_IMPORTED_MODULE_1___default().get(reviewPage + "per_page=25&").then(function (res) {
                   var review = res.data;
@@ -8937,7 +8947,9 @@ function Detail() {
                 })["catch"](function (error) {
                   return console.error("Error: ".concat(error));
                 });
-              } else if (e === "20") {
+              }
+              // 20
+              else if (e === "20") {
                 axios__WEBPACK_IMPORTED_MODULE_1___default().get(reviewPage + "per_page=20&").then(function (res) {
                   var review = res.data;
                   console.log(review);
@@ -8945,7 +8957,9 @@ function Detail() {
                 })["catch"](function (error) {
                   return console.error("Error: ".concat(error));
                 });
-              } else if (e === "15") {
+              }
+              // 15
+              else if (e === "15") {
                 axios__WEBPACK_IMPORTED_MODULE_1___default().get(reviewUrl + "per_page=15&").then(function (res) {
                   var review = res.data;
                   console.log(review);
@@ -8953,7 +8967,9 @@ function Detail() {
                 })["catch"](function (error) {
                   return console.error("Error: ".concat(error));
                 });
-              } else if (e === "5") {
+              }
+              // 5
+              else if (e === "5") {
                 axios__WEBPACK_IMPORTED_MODULE_1___default().get(reviewUrl + "per_page=5&").then(function (res) {
                   var review = res.data;
                   console.log(review);
@@ -8973,14 +8989,17 @@ function Detail() {
       return _ref2.apply(this, arguments);
     };
   }();
-  // console.log(id);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    // API BEFORE SORT
+    // BOOK DETAIL
     axios__WEBPACK_IMPORTED_MODULE_1___default().get(baseURL).then(function (response) {
       var book = response.data;
       setShowDetail(book);
     })["catch"](function (error) {
       return console.error("Error: ".concat(error));
     });
+
+    // REVIEW
     axios__WEBPACK_IMPORTED_MODULE_1___default().get(reviewUrl).then(function (res) {
       var review = res.data;
       console.log(review);
@@ -9203,7 +9222,7 @@ __webpack_require__.r(__webpack_exports__);
 function Footer() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("footer", {
     id: "sticky-footer",
-    className: "align-items-end mt-5 flex-shrink-0 py-4 bg-dark text-white-50",
+    className: "align-items-end mt-5 flex-shrink-0 py-4 bg-dark text-white-50 bottom-0",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "container text-center",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("small", {
@@ -9312,14 +9331,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function LoginDropdown() {
-  // const headers = {headers :
-  //     { Authorization: `Bearer ${token}`,
-  //       Accept :'application/json', 
-  //     }
-  //    };
-  //        axios.get(basePath+'templates',headers)
-  //   .then(resp => {console.log(resp)})
-
   axios__WEBPACK_IMPORTED_MODULE_0___default().interceptors.request.use(function (config) {
     var token = localStorage.getItem('token');
     config.headers.Authorization = token ? "Bearer ".concat(token) : '';
@@ -9389,7 +9400,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function LoginModal() {
-  // setshow modal
+  // SETSHOW
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     show = _useState2[0],
@@ -9401,7 +9412,7 @@ function LoginModal() {
     return setShow(true);
   };
 
-  // login function
+  // LOGIN FUNCTION
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useNavigate)();
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(""),
     _useState4 = _slicedToArray(_useState3, 2),
@@ -9419,7 +9430,7 @@ function LoginModal() {
           email: email,
           password: password
         }).then(function (response) {
-          //set response in local storage
+          //SET RESPONSE TO LOCAL STORAGE
           // console.log(response.data.token);
           localStorage.setItem("user", JSON.stringify(response.data));
           localStorage.setItem("token", JSON.stringify(response.data.token));
@@ -9536,16 +9547,17 @@ function Feature() {
     setPopular = _useState4[1];
   var baseURL = "http://127.0.0.1:8000/api/home/recommended";
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    // API GET RECOMMENDED BOOKS
     axios__WEBPACK_IMPORTED_MODULE_1___default().get(baseURL).then(function (response) {
       var topRecommended = response.data.data;
-      // console.log(topRecommended);
       setRecommended(topRecommended);
     })["catch"](function (error) {
       return console.error("Error: ".concat(error));
     });
+
+    //API GET POPULAR BOOKS
     axios__WEBPACK_IMPORTED_MODULE_1___default().get("http://127.0.0.1:8000/api/home/popular").then(function (response) {
       var topPopular = response.data.data;
-      // console.log(topPopular);
       setPopular(topPopular);
     })["catch"](function (error) {
       return console.error("Error: ".concat(error));
@@ -9625,7 +9637,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var responsive = {
   superLargeDesktop: {
-    // the naming can be any, depends on you.
     breakpoint: {
       max: 4000,
       min: 3000
@@ -9654,6 +9665,7 @@ var responsive = {
     items: 1
   }
 };
+// SLIDE SHOW
 function Hero() {
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
     _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -9663,15 +9675,11 @@ function Hero() {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     axios__WEBPACK_IMPORTED_MODULE_0___default().get(baseURL).then(function (response) {
       var topDiscount = response.data.data;
-      // console.log(topDiscount);
       setDiscount(topDiscount);
     })["catch"](function (error) {
       return console.error("Error: ".concat(error));
     });
   }, []);
-
-  // const checkNullDiscount = () => {
-  //     if (discount != null) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_multi_carousel__WEBPACK_IMPORTED_MODULE_2__["default"], {
     responsive: responsive,
     children: discount.map(function (book, index) {
@@ -9766,12 +9774,15 @@ function Filter() {
   var authorURL = "http://127.0.0.1:8000/api/author";
   var categoryURL = "http://127.0.0.1:8000/api/category";
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    // API GET author name
     axios__WEBPACK_IMPORTED_MODULE_1___default().get(authorURL).then(function (response) {
       var getAuthor = response.data;
       setAuthor(getAuthor);
     })["catch"](function (error) {
       return console.error("Error: ".concat(error));
     });
+
+    // API GET category name
     axios__WEBPACK_IMPORTED_MODULE_1___default().get(categoryURL).then(function (response) {
       var getCategory = response.data;
       // console.log(getCategory);
@@ -9906,6 +9917,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CardBooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../CardBooks */ "./resources/js/Layout/CardBooks.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -9922,62 +9937,79 @@ function Content() {
     _useState2 = _slicedToArray(_useState, 2),
     show = _useState2[0],
     setShow = _useState2[1];
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [postsPerPage, setPostsPerPage] = useState(10);
-
   var baseURL = "http://127.0.0.1:8000/api/show?onsale=desc&per_page=15";
   var param = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.useParams)();
   console.log("category" + param.categoryId);
   console.log("author" + param.authorId);
-  console.log(param.star);
-  var loadProduct = function loadProduct() {
-    if (param.categoryId === undefined && param.authorId === undefined) {
-      // call default api
-      axios__WEBPACK_IMPORTED_MODULE_1___default().get(baseURL).then(function (response) {
-        var books = response.data.data;
-        setShow(books);
-      })["catch"](function (error) {
-        return console.error("Error: ".concat(error));
-      });
-    } else if (param.categoryId !== undefined) {
-      // get by category
-      axios__WEBPACK_IMPORTED_MODULE_1___default().get("http://127.0.0.1:8000/api/show?category_id=".concat(param.categoryId)).then(function (response) {
-        var books = response.data.data;
-        console.log(books);
-        setShow(books);
-      })["catch"](function (error) {
-        return console.error("Error: ".concat(error));
-      });
-    } else if (param.authorId !== undefined) {
-      axios__WEBPACK_IMPORTED_MODULE_1___default().get("http://127.0.0.1:8000/api/show?author_id=".concat(param.authorId)).then(function (response) {
-        var books = response.data.data;
-        console.log(books);
-        setShow(books);
-      })["catch"](function (error) {
-        return console.error("Error: ".concat(error));
-      });
-    } else if (param.star !== undefined) {
-      axios__WEBPACK_IMPORTED_MODULE_1___default().get("http://127.0.0.1:8000/api/show?rating_start=".concat(param.star)).then(function (response) {
-        var books = response.data.data;
-        console.log(books);
-        setShow(books);
-      })["catch"](function (error) {
-        return console.error("Error: ".concat(error));
-      });
-    }
-  };
+  console.log(parseInt(param.star));
+  var loadProduct = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              // FILTER API
+              if (param.categoryId === undefined && param.authorId === undefined) {
+                // CALL DEFAULT API
+                axios__WEBPACK_IMPORTED_MODULE_1___default().get(baseURL).then(function (response) {
+                  var books = response.data.data;
+                  setShow(books);
+                })["catch"](function (error) {
+                  return console.error("Error: ".concat(error));
+                });
+              }
+              // API FILTRER CATEGORY
+              else if (param.categoryId !== undefined) {
+                axios__WEBPACK_IMPORTED_MODULE_1___default().get("http://127.0.0.1:8000/api/show?category_id=".concat(param.categoryId)).then(function (response) {
+                  var books = response.data.data;
+                  console.log(books);
+                  setShow(books);
+                })["catch"](function (error) {
+                  return console.error("Error: ".concat(error));
+                });
+              }
+              // API FILTER AUTHOR
+              else if (param.authorId !== undefined) {
+                axios__WEBPACK_IMPORTED_MODULE_1___default().get("http://127.0.0.1:8000/api/show?author_id=".concat(param.authorId)).then(function (response) {
+                  var books = response.data.data;
+                  console.log(books);
+                  setShow(books);
+                })["catch"](function (error) {
+                  return console.error("Error: ".concat(error));
+                });
+              }
+              // API FILTER STAR
+              else if (param.star !== undefined) {
+                axios__WEBPACK_IMPORTED_MODULE_1___default().get("http://127.0.0.1:8000/api/show?rating_start=".concat(param.star)).then(function (response) {
+                  var books = response.data.data;
+                  console.log(response);
+                  setShow(books);
+                })["catch"](function (error) {
+                  return console.error("Error: ".concat(error));
+                });
+              }
+            case 1:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+    return function loadProduct() {
+      return _ref.apply(this, arguments);
+    };
+  }();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     loadProduct();
   }, []);
 
-  // Get current book
-  // const indexOfLastPost = currentPage * postsPerPage;
-  // const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  // const currentPosts = show.slice(indexOfFirstPost, indexOfLastPost);
+  // LOOP THE BOOK ARRAY
 
+  console.log(show);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
     className: "row",
     children: show.map(function (book, index) {
+      // CARD BOOK
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_CardBooks__WEBPACK_IMPORTED_MODULE_2__["default"], {
         book: book
       }, index);
@@ -10028,57 +10060,61 @@ function DropdownShop() {
     console.log(e);
     setPageValue(e);
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-    className: "row pb-5 ms-auto",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      className: "btn-drop-down col",
-      variant: "secondary",
-      id: "dropdown-basic-button",
-      alignRight: true,
-      onSelect: handleSelect,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Toggle, {
+  return (
+    /*#__PURE__*/
+    // SORT BY:
+    (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: "row pb-5 ms-auto",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        className: "btn-drop-down col",
         variant: "secondary",
-        id: "dropdown-basic",
-        children: ["Sort By ", sortValue]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Menu, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
-          eventKey: "onsale",
-          children: "Sort by Sale"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
-          eventKey: "popular",
-          children: "Sort By popular"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
-          eventKey: "lowtohigh",
-          children: "Sort by price : low to high"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
-          eventKey: "hightolow",
-          children: "Sort by price : high to low"
+        id: "dropdown-basic-button",
+        alignRight: true,
+        onSelect: handleSelect,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Toggle, {
+          variant: "secondary",
+          id: "dropdown-basic",
+          children: ["Sort By ", sortValue]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Menu, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
+            eventKey: "onsale",
+            children: "Sort by Sale"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
+            eventKey: "popular",
+            children: "Sort By popular"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
+            eventKey: "lowtohigh",
+            children: "Sort by price : low to high"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
+            eventKey: "hightolow",
+            children: "Sort by price : high to low"
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        className: "col",
+        onSelect: handlePageValue,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Toggle, {
+          variant: "secondary",
+          id: "dropdown-basic",
+          children: ["Show ", pageValue]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Menu, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
+            eventKey: "25",
+            children: "Show 25"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
+            eventKey: "20",
+            children: "Show 20"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
+            eventKey: "15",
+            children: "Show 15"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
+            eventKey: "5",
+            children: "Show 5"
+          })]
         })]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      className: "col",
-      onSelect: handlePageValue,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Toggle, {
-        variant: "secondary",
-        id: "dropdown-basic",
-        children: ["Show ", pageValue]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Menu, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
-          eventKey: "25",
-          children: "Show 25"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
-          eventKey: "20",
-          children: "Show 20"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
-          eventKey: "15",
-          children: "Show 15"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"].Item, {
-          eventKey: "5",
-          children: "Show 5"
-        })]
-      })]
-    })]
-  });
+    })
+  );
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DropdownShop);
 
@@ -10168,13 +10204,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Container.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
+
+
 function Cart() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h1", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h2", {
+      className: "mt-5",
       children: "Cart Page"
-    })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("hr", {})]
   });
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Cart);
@@ -10260,10 +10300,6 @@ function Shop() {
     _useState2 = _slicedToArray(_useState, 2),
     authors = _useState2[0],
     setAuthors = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
-    _useState4 = _slicedToArray(_useState3, 2),
-    categories = _useState4[0],
-    setCategories = _useState4[1];
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "container mt-5",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -10272,9 +10308,9 @@ function Shop() {
         children: "Books"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         children: "\xA0"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h5", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
         className: "mt-2",
-        children: ["(Filtered by ", categories.id, ")"]
+        children: "(Filtered by: )"
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       className: "row",
@@ -10569,7 +10605,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "body {\r\n    font-family: 'Nunito', sans-serif;\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n\r\nmain {\r\n    min-height: 100vh;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    background: rgb(247, 250, 252);\r\n}\r\n\r\n.welcome-text {\r\n    color: #f75454;\r\n    font-weight: 600;\r\n    font-size: 2rem;\r\n    -webkit-font-smoothing: antialiased;\r\n    padding: 100px;\r\n    border: 5px solid #f75454;\r\n}\r\n\r\n.welcome-text > span {\r\n    font-size: 2.1rem;\r\n    text-shadow: 3px 3px #fbbcbc;\r\n}\r\n\r\n.small-welcome-text {\r\n    color: #f75454;\r\n    font-size: 0.5rem;\r\n    font-weight: bold;\r\n    margin-left: 6px;\r\n    margin-bottom: 1px;\r\n}\r\n\r\n/* NAV */\r\n.navbar_warapper a{\r\n    padding-right: 20px;\r\n}\r\n\r\n.navbar-nav>a{\r\n    color: white;\r\n    text-decoration: none;\r\n    /* margin-top: 7px; */\r\n    padding: 6px 13px 6px 13px;\r\n}\r\n\r\n.navbar-nav>a:hover { \r\n    text-decoration: underline;\r\n    color: white;\r\n}\r\n\r\n\r\n.navbar-nav>a:active { \r\n    text-decoration: underline;\r\n    color: white; \r\n}\r\n\r\n/* HOME */\r\n.wrapper{\r\n    display: flex;\r\n}\r\n\r\n.right-button{\r\n    margin-left: auto;\r\n}\r\n\r\n.card {\r\n    margin: 0 0.5em;\r\n    box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);\r\n    border: none;\r\n    border-radius: 0;\r\n}\r\n  .carousel-inner {\r\n    padding: 1em;\r\n}\r\n\r\n.carousel-control-prev-icon {\r\n    margin-right: auto;\r\n}\r\n\r\n.carousel-control-next-icon {\r\n    margin-left: auto;\r\n}\r\n\r\n.sr-only{\r\n    display: none;\r\n}\r\n\r\n.title-page{\r\n    color: black;\r\n}\r\n\r\n/* SHOP */\r\nul>li{\r\n    list-style-type: none;\r\n}\r\n\r\n.accordion .card-header{\r\n    background-color: white;\r\n    border: none;\r\n}\r\n\r\n.accordion .btn-link{\r\n    text-decoration: none;\r\n    color: black;\r\n    font-weight: bold;\r\n}\r\n.accordion .btn-link:hover{\r\n    color: rgb(112, 112, 112);\r\n}\r\n\r\n.show-book{\r\n    left: 0;\r\n}\r\n\r\n/* ONSALE */\r\n.text-content{\r\n    text-decoration: none;\r\n    color: black;\r\n    margin: 0;\r\n\r\n}\r\n\r\n.card-title{\r\n    overflow: hidden;\r\n    white-space: nowrap; \r\n    text-overflow: ellipsis;\r\n}\r\n\r\n.nav-tabs{\r\n    justify-content: center;\r\n}\r\n\r\n.show-display{\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\n/* Detail */\r\n.detail-body{\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n.text-aligh-right{\r\n    text-align: right;\r\n}\r\n\r\n.book-detail{\r\n    height: 380px;\r\n}\r\n.review-star > a{\r\n    color: black;\r\n}\r\n/* Footer */\r\nfooter{\r\n    flex-shrink: 0;\r\n}\r\n\r\n.right-col{\r\n    padding: 0 0 20px 20px !important;\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "body {\r\n    font-family: 'Nunito', sans-serif;\r\n    padding: 0;\r\n    margin: 0;\r\n}\r\n\r\nmain {\r\n    min-height: 100vh;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    background: rgb(247, 250, 252);\r\n}\r\n\r\n.welcome-text {\r\n    color: #f75454;\r\n    font-weight: 600;\r\n    font-size: 2rem;\r\n    -webkit-font-smoothing: antialiased;\r\n    padding: 100px;\r\n    border: 5px solid #f75454;\r\n}\r\n\r\n.welcome-text > span {\r\n    font-size: 2.1rem;\r\n    text-shadow: 3px 3px #fbbcbc;\r\n}\r\n\r\n.small-welcome-text {\r\n    color: #f75454;\r\n    font-size: 0.5rem;\r\n    font-weight: bold;\r\n    margin-left: 6px;\r\n    margin-bottom: 1px;\r\n}\r\n\r\n/* NAV */\r\n.navbar_warapper a{\r\n    padding-right: 20px;\r\n}\r\n\r\n.navbar-nav>a{\r\n    color: white;\r\n    text-decoration: none;\r\n    /* margin-top: 7px; */\r\n    padding: 6px 13px 6px 13px;\r\n}\r\n\r\n.navbar-nav>a:hover { \r\n    text-decoration: underline;\r\n    color: white;\r\n}\r\n\r\n\r\n.navbar-nav>a:active { \r\n    text-decoration: underline;\r\n    color: white; \r\n}\r\n\r\n/* HOME */\r\n.wrapper{\r\n    display: flex;\r\n}\r\n\r\n.right-button{\r\n    margin-left: auto;\r\n}\r\n\r\n.card {\r\n    margin: 0 0.5em;\r\n    box-shadow: 2px 6px 8px 0 rgba(22, 22, 26, 0.18);\r\n    border: none;\r\n    border-radius: 0;\r\n}\r\n  .carousel-inner {\r\n    padding: 1em;\r\n}\r\n\r\n.carousel-control-prev-icon {\r\n    margin-right: auto;\r\n}\r\n\r\n.carousel-control-next-icon {\r\n    margin-left: auto;\r\n}\r\n\r\n.sr-only{\r\n    display: none;\r\n}\r\n\r\n.title-page{\r\n    color: black;\r\n}\r\n\r\n/* SHOP */\r\nul>li{\r\n    list-style-type: none;\r\n}\r\n\r\n.accordion .card-header{\r\n    background-color: white;\r\n    border: none;\r\n}\r\n\r\n.accordion .btn-link{\r\n    text-decoration: none;\r\n    color: black;\r\n    font-weight: bold;\r\n}\r\n.accordion .btn-link:hover{\r\n    color: rgb(112, 112, 112);\r\n}\r\n\r\n.show-book{\r\n    left: 0;\r\n}\r\n\r\n/* ONSALE */\r\n.text-content{\r\n    text-decoration: none;\r\n    color: black;\r\n    margin: 0;\r\n\r\n}\r\n\r\n.card-title{\r\n    overflow: hidden;\r\n    white-space: nowrap; \r\n    text-overflow: ellipsis;\r\n}\r\n\r\n.nav-tabs{\r\n    justify-content: center;\r\n}\r\n\r\n.show-display{\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\n/* Detail */\r\n.detail-body{\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n.text-aligh-right{\r\n    text-align: right;\r\n}\r\n\r\n.book-detail{\r\n    height: 380px;\r\n}\r\n.review-star > a{\r\n    color: black;\r\n}\r\n/* Footer */\r\nfooter{\r\n    flex-shrink: 0;\r\n    bottom: 0;\r\n}\r\n\r\n.right-col{\r\n    padding: 0 0 20px 20px !important;\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

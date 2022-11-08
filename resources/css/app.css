@@ -156,6 +156,7 @@ ul>li{
 /* Footer */
 footer{
     flex-shrink: 0;
+    bottom: 0;
 }
 
 .right-col{

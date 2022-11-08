@@ -7,7 +7,6 @@ import IMAGES from "../../../assets/bookcover/images";
 import {Link} from 'react-router-dom';
 const responsive = {
     superLargeDesktop: {
-        // the naming can be any, depends on you.
         breakpoint: { max: 4000, min: 3000 },
         items: 5,
     },
@@ -24,7 +23,7 @@ const responsive = {
         items: 1,
     },
 };
-
+// SLIDE SHOW
 function Hero() {
     const [discount, setDiscount] = React.useState([]);
     const baseURL = `http://127.0.0.1:8000/api/home/discount`;
@@ -34,14 +33,11 @@ function Hero() {
             .get(baseURL)
             .then((response) => {
                 const topDiscount = response.data.data;
-                // console.log(topDiscount);
                 setDiscount(topDiscount);
             })
             .catch((error) => console.error(`Error: ${error}`));
     }, []);
 
-    // const checkNullDiscount = () => {
-    //     if (discount != null) {
     return (
         <Carousel responsive={responsive}>
             {discount.map((book, index) => {
@@ -71,7 +67,6 @@ function Hero() {
                                 </ListGroup>
                             </Card>
                             </Link>
-                            {/* <CardBooks book={book} key={index} /> */}
                     </div>
                 );
             })}

@@ -5,7 +5,6 @@ import {
     Col,
     Container,
     Dropdown,
-    DropdownButton,
     Row,
 } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
@@ -16,17 +15,21 @@ export default function Detail() {
     const [sortValue, setSortValue] = useState("");
     const [pageValue, setPageValue] = useState("");
     const handleSelect = (e) => {
+        // SORT DATE
         setSortValue(e);
-        // Call api eventKey
+        // CALL API BY EVENKEY
         loadReview(e);
     };
 
+    // SORT PAGE
     const handlePageValue = (e) => {
         // console.log(e);
         setPageValue(e)
-        // Call api eventKey
+        // CALL API BY EVENKEY
         loadPage(e)
     };
+
+    // +1 WHEN CLICK THE BUTTON
     const increment = () => {
         setCount(count + 1);
         if (count == 8) {
@@ -34,6 +37,7 @@ export default function Detail() {
         }
     };
 
+    // -1 WHEN CLICK THE BUTTON
     const decrement = () => {
         setCount(count - 1);
         if (count == 0) {
@@ -48,8 +52,9 @@ export default function Detail() {
     const reviewUrl = `http://127.0.0.1:8000/api/bookdetail/review/${id}?`;
     const reviewPage = `http://127.0.0.1:8000/api/bookdetail/review/${id}?`;
 
+    // API SORT REVIEW
     const loadReview = async (e) => {
-
+        // SORT BY DATE: NEWEST TO OLDEST
         if (e === "Date: newest to oldest") {
             await axios
                 .get(reviewUrl + `sort=new_to_old&`)
@@ -60,7 +65,9 @@ export default function Detail() {
                 })
                 .catch((error) => console.error(`Error: ${error}`));
                 console.log(newReview);
-        } else if (e === "Date: oldest to newest") {
+        } 
+        // SORT BY DATE: OLDEST TO NEWEST
+        else if (e === "Date: oldest to newest") {
             await axios
                 .get(reviewUrl + `sort=old_to_new&`)
                 .then((res) => {
@@ -73,7 +80,9 @@ export default function Detail() {
         }
     };
 
+    // SORT BY PAGE
     const loadPage = async (e) => {
+        // 25
         if (e === "25") {
             axios
                 .get(reviewPage + `per_page=25&`)
@@ -83,7 +92,9 @@ export default function Detail() {
                     setShowReview(review);
                 })
                 .catch((error) => console.error(`Error: ${error}`));
-        } else if (e === "20") {
+        } 
+        // 20
+        else if (e === "20") {
             axios
                 .get(reviewPage + `per_page=20&`)
                 .then((res) => {
@@ -92,7 +103,9 @@ export default function Detail() {
                     setShowReview(review);
                 })
                 .catch((error) => console.error(`Error: ${error}`));
-        } else if (e === "15") {
+        } 
+        // 15
+        else if (e === "15") {
             axios
                 .get(reviewUrl + `per_page=15&`)
                 .then((res) => {
@@ -101,7 +114,9 @@ export default function Detail() {
                     setShowReview(review);
                 })
                 .catch((error) => console.error(`Error: ${error}`));
-        } else if (e === "5") {
+        }
+        // 5
+        else if (e === "5") {
             axios
                 .get(reviewUrl + `per_page=5&`)
                 .then((res) => {
@@ -112,8 +127,11 @@ export default function Detail() {
                 .catch((error) => console.error(`Error: ${error}`));
         }
     };
-    // console.log(id);
+
+
     useEffect(() => {
+        // API BEFORE SORT
+        // BOOK DETAIL
         axios
             .get(baseURL)
             .then((response) => {
@@ -122,6 +140,7 @@ export default function Detail() {
             })
             .catch((error) => console.error(`Error: ${error}`));
 
+        // REVIEW
         axios
             .get(reviewUrl)
             .then((res) => {
@@ -142,7 +161,7 @@ export default function Detail() {
                 <h2>{showDetail.category_name}</h2>
             </div>
             <hr />
-            {/* Product Detail */}
+            {/* PRODUCT DETAIL */}
             <Row>
                 <Col xs={8} className="border book-detail p-0">
                     <Row>
@@ -221,7 +240,7 @@ export default function Detail() {
             {/* REVIEW */}
             <Row>
                 <Col xs={8} className="border mt-5 p-0">
-                    {/* Product Detail */}
+                    {/* PRODUCT DETAIL */}
                     <Row>
                         <Col xs={11} className="m-4">
                             <div className="wrapper bottom-0">

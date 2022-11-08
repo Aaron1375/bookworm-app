@@ -6,9 +6,7 @@ import IMAGES from "../../assets/bookcover/images";
 export default function CardBooks(props) {
 
     const {book} = props
-    const clickDetail = () => {
-        // console.log(book.id)
-    }
+// CARD BOOK
     return (
         <div className="col-3 justify-content-center mt-2 ml-2">
             <Link className="text-content" to={`/detail/${book.id}`}>

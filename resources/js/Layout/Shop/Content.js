@@ -5,19 +5,19 @@ import { useParams } from "react-router-dom";
 
 export default function Content() {
     const [show, setShow] = useState([]);
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const [postsPerPage, setPostsPerPage] = useState(10);
 
     const baseURL = "http://127.0.0.1:8000/api/show?onsale=desc&per_page=15";
 
     const param = useParams();
     console.log("category" + param.categoryId);
     console.log("author" + param.authorId);
-    console.log(param.star);
+    console.log(parseInt(param.star));
 
-    const loadProduct = () => {
+
+    const loadProduct = async () => {
+        // FILTER API
         if (param.categoryId === undefined && param.authorId === undefined) {
-            // call default api
+            // CALL DEFAULT API
             axios
                 .get(baseURL)
                 .then((response) => {
@@ -25,8 +25,9 @@ export default function Content() {
                     setShow(books);
                 })
                 .catch((error) => console.error(`Error: ${error}`));
-        } else if (param.categoryId !== undefined) {
-            // get by category
+        } 
+        // API FILTRER CATEGORY
+        else if (param.categoryId !== undefined) {
             axios
                 .get(
                     `http://127.0.0.1:8000/api/show?category_id=${param.categoryId}`
@@ -37,7 +38,9 @@ export default function Content() {
                     setShow(books);
                 })
                 .catch((error) => console.error(`Error: ${error}`));
-        } else if (param.authorId !== undefined) {
+        } 
+        // API FILTER AUTHOR
+        else if (param.authorId !== undefined) {
             axios
                 .get(
                     `http://127.0.0.1:8000/api/show?author_id=${param.authorId}`
@@ -48,14 +51,16 @@ export default function Content() {
                     setShow(books);
                 })
                 .catch((error) => console.error(`Error: ${error}`));
-        } else if (param.star !== undefined) {
+        } 
+        // API FILTER STAR
+        else if (param.star !== undefined) {
             axios
                 .get(
                     `http://127.0.0.1:8000/api/show?rating_start=${param.star}`
                 )
                 .then((response) => {
                     const books = response.data.data;
-                    console.log(books);
+                    console.log(response);
                     setShow(books);
                 })
                 .catch((error) => console.error(`Error: ${error}`));
@@ -66,20 +71,17 @@ export default function Content() {
         loadProduct();    
     }, []);
 
-    // Get current book
-    // const indexOfLastPost = currentPage * postsPerPage;
-    // const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    // const currentPosts = show.slice(indexOfFirstPost, indexOfLastPost);
+    // LOOP THE BOOK ARRAY
 
+    console.log(show);
     return (
         <div className="row">
 
-        {/* return <CardBooks show={currentPosts}/>; */}
-
 
             {show.map((book, index) => {
-                return <CardBooks book={book} key={index} />;
-            })}
+                // CARD BOOK
+                return <CardBooks book={book} key={index}/>;
+            })} 
             
         </div>
     );

@@ -13,6 +13,7 @@ function DropdownShop() {
         setPageValue(e);
     };
     return (
+        // SORT BY:
         <div className="row pb-5 ms-auto">
             <Dropdown
                 className="btn-drop-down col"

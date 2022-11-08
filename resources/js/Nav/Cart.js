@@ -1,8 +1,10 @@
+import { Container } from 'react-bootstrap';
 function Cart(){
     return(
-        <div>
-            <h1>Cart Page</h1>
-        </div>
+        <Container>
+            <h2 className='mt-5'>Cart Page</h2>
+            <hr/>
+        </Container>
     );
 }
 

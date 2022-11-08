@@ -3,14 +3,6 @@ import { Dropdown, DropdownButton } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 function LoginDropdown() {
-    // const headers = {headers :
-    //     { Authorization: `Bearer ${token}`,
-    //       Accept :'application/json', 
-    //     }
-    //    };
-//        axios.get(basePath+'templates',headers)
-//   .then(resp => {console.log(resp)})
-
     axios.interceptors.request.use(function (config){
         const token = localStorage.getItem('token');
         config.headers.Authorization = token ? `Bearer ${token}` : '';

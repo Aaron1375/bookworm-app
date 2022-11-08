@@ -13,14 +13,14 @@ function Login() {
         ev.preventDefault();
 
         if (email.length > 0 && password.length > 0) {
+            // GET COOKIE
             axios.get("/sanctum/csrf-cookie").then(() => {
                 axios.post("api/login", {
                         email: email,
                         password: password,
                     })
                     .then((response) => {
-                        //set response in local storage
-                        // console.log(response.data.token);
+                        // SET RESPONSE IN LOCAL STORAGE
                         localStorage.setItem("user",JSON.stringify(response.data));
                         localStorage.setItem('token', JSON.stringify(response.data.token));
                         swal("Success","success");
